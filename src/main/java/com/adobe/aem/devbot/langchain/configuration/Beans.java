@@ -5,6 +5,7 @@ import dev.langchain4j.model.azure.AzureOpenAiChatModel;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class Beans {
@@ -20,5 +21,10 @@ public class Beans {
     @Bean
     LangchainRagService langchainRagService(ChatLanguageModel chatLanguageModel) {
         return new LangchainRagService(chatLanguageModel);
+    }
+
+    @Bean
+    RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }
