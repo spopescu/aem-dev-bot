@@ -7,7 +7,6 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class SpecializedBotService {
-    public static final String BOT_MODEL = "codellama:7b";
     private final SpecializedBotsConfiguration specializedBotsConfiguration;
     private final RestTemplate restTemplate;
 
@@ -25,8 +24,8 @@ public class SpecializedBotService {
     }
 
     private @Nullable String getAnswer(String question, String botUrl) {
-        return restTemplate.postForObject(botUrl, new BotRequest(question, BOT_MODEL, false), String.class);
+        return restTemplate.postForObject(botUrl, new BotRequest(question), String.class);
     }
 
-    private record BotRequest(String prompt, String model, boolean stream) {}
+    private record BotRequest(String prompt) {}
 }
