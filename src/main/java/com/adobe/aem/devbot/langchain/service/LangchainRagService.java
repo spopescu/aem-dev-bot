@@ -20,7 +20,7 @@ import java.util.List;
 
 @Service
 public class LangchainRagService {
-    @Value("classpath:/data/incidents.json")
+    @Value("classpath:/data/test.json")
     private Resource incidentsResource;
 
     private final ChatLanguageModel chatLanguageModel;
