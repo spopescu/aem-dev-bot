@@ -51,6 +51,7 @@ public class LangchainMasterBotService {
         LangchainMasterBotService.Assistant assistant = AiServices.builder(LangchainMasterBotService.Assistant.class)
                 .chatLanguageModel(chatLanguageModel)
                 .contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore))
+                // uncomment to allow calling external bots
 //                .tools(localizedBotsConfig)
                 .build();
         return assistant.chat(message);
