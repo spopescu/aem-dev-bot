@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 public class LangchainMasterBotService {
 
-    @Value("classpath:/data/marker.json")
+    @Value("classpath:/data/oak.txt")
     private Resource markerResource;
 
     private final ChatLanguageModel chatLanguageModel;
