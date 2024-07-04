@@ -1,5 +1,6 @@
 package com.adobe.aem.devbot.langchain.service;
 
+import com.adobe.aem.devbot.langchain.configuration.LangchainDelegationConfig;
 import dev.langchain4j.data.document.Document;
 import dev.langchain4j.data.document.loader.FileSystemDocumentLoader;
 import dev.langchain4j.data.segment.TextSegment;
@@ -18,31 +19,39 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public class LangchainRagService {
+public class LangchainMasterBotService {
+
     @Value("classpath:/data/marker.json")
-    private Resource testResource;
+    private Resource markerResource;
 
     private final ChatLanguageModel chatLanguageModel;
 
-    public LangchainRagService(ChatLanguageModel chatLanguageModel) {
+    private final LangchainDelegationService langchainDelegationService;
+
+    private final LangchainDelegationConfig localizedBotsConfig;
+
+    public LangchainMasterBotService(ChatLanguageModel chatLanguageModel, LangchainDelegationService langchainDelegationService, LangchainDelegationConfig langchainDelegationConfig) {
         this.chatLanguageModel = chatLanguageModel;
+        this.langchainDelegationService = langchainDelegationService;
+        this.localizedBotsConfig = langchainDelegationConfig;
     }
 
     public String retrieve(String message) throws IOException {
         // Create an instance of your Assistant AiService
 
         // Load documents
-        String path = testResource.getFile().getParent();
-        List<Document> documents = FileSystemDocumentLoader.loadDocuments(path);
+        String dataFolderPath = markerResource.getFile().getParent();
+        List<Document> documents = FileSystemDocumentLoader.loadDocuments(dataFolderPath);
 
         // Initialize vector store and ingest the documents into it
         EmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore<>();
         EmbeddingStoreIngestor.ingest(documents, embeddingStore);
 
         // Move your AI Service down here and make it point to the vector store
-        Assistant assistant = AiServices.builder(Assistant.class)
+        LangchainMasterBotService.Assistant assistant = AiServices.builder(LangchainMasterBotService.Assistant.class)
                 .chatLanguageModel(chatLanguageModel)
                 .contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore))
+//                .tools(localizedBotsConfig)
                 .build();
         return assistant.chat(message);
     }
@@ -50,11 +59,11 @@ public class LangchainRagService {
     // Create an Assistant interface with a chat method
     interface Assistant {
         @SystemMessage("""
-            You are AEM Dev Bot, an expert programmer that analyses code changes in Git Pull Requests.
+            You are AEM Dev Bot, an expert programmer that analyses code changes in Github Pull Requests.
             You will apply best practices and coding standards to the code changes and provide a list of found issues.
             You will also provide a detailed explanation of the issues and suggest possible solutions.
             You are assisted by a collection of specialized bots, each specialized on a different Git repository of AEM code.
-            You will delegate questions specific to JCR or Sling code to the appropriate bot.
+            You will delegate questions specific to Oak or Sling code to the appropriate bot.
             You will then collect the answers and assemble them into a JSON response. 
             """)
         String chat(String userMessage);
