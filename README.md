@@ -29,3 +29,18 @@ Solutions for each task are available in the following Github branches:
 4. Add your `API_KEY` in the `application.properties` file
 5. Run the application
 6. Send requests to `localhost:8080`(change the endpoint according to the task you are working on)
+
+## Setup Bots
+
+1. Install and start Flowise (follow instruction from https://github.com/FlowiseAI/Flowise)
+2. Download ollama (https://ollama.com/download/mac or follow https://github.com/ollama/ollama) and start it (either starting the Application itself or running `ollama serve`. By default it will start on port 11434) 
+3. Start codellama model using the ollama environment: `ollama run codellama:7b`
+4. In the browser, access the Flowise UI at `localhost:3000` and import the 2 chatflows from the `/resources` folder.
+5. Access each of the 2 created chatflows
+ 5.1 In the UI, link the documentation files (ex: `sling.txt`) to the respective bot embedding document.
+ 5.2 Get the endpoints for each of them (should be similar to `http://localhost:3000/api/v1/prediction/fd267914-6759-47c1-89bd-e897b1d1b175`)
+6. Complete the `application.properties` file with the 2 URLs for each bot. We have now linked each Spring Bot Bean to their running Bot instances. 
+
+Note that the Bots use the same running model, but 2 different vector stores for retrieving the embeddings. It is the Flowise app that adds an abstraction layer and wraps the calls to the model itself, so we can treat each Bot as a standalone service that just retrieves a question.
+
+The **Master App** is now able to make API calls to the Bots.
