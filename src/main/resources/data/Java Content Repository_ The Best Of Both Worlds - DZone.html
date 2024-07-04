@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Learn the basics of Java Content Repositories, including how they work, and how they're used.">
+  <meta name="keywords" content="repository, property, java, Database, Content repository, API, Content management system">
+
+  <meta property="og:description" content="Learn the basics of Java Content Repositories, including how they work, and how they're used.">
+  <meta property="og:site_name" content="dzone.com">
+  <meta property="og:title" content="Java Content Repository: The Best Of Both Worlds - DZone">
+  <meta property="og:url" content="https://dzone.com/articles/java-content-repository-best">
+  <meta property="og:image" content="https://dz2cdn1.dzone.com/storage/article-thumb/13833-thumb.jpg">
+  <meta property="og:type" content="article">
+
+  <meta name="twitter:site" content="@DZoneInc">
+  <meta name="twitter:image" content="https://dz2cdn1.dzone.com/storage/article-thumb/13833-thumb.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:description" content="Learn the basics of Java Content Repositories, including how they work, and how they're used.">
+  <meta name="twitter:title" content="Java Content Repository: The Best Of Both Worlds - DZone">
+
+
+  <meta name="referrer" content="origin-when-cross-origin">
+  <meta name="google-site-verification" content="kndbhxcupfEqWmZclhCpB6vlgOs7QSmx2UHAGGnP2mA">
+  <meta name="df-verify" content="df0d76632b4543">
+
+  <link rel="icon" type="image/x-icon" href="https://dz2cdn1.dzone.com/themes/dz20/images/favicon.png">
+  <link rel="image_src" href="https://dz2cdn1.dzone.com/storage/article-thumb/13833-thumb.jpg">
+  <link rel="canonical" href="https://dzone.com/articles/java-content-repository-best">
+
+  <title>Java Content Repository: The Best Of Both Worlds - DZone</title>
+
+  <link rel="preload" href="https://dz2cdn1.dzone.com/themes/dz20/font/fontello.woff?11773374" as="font" type="font/woff" crossorigin="anonymous">
+
+  <link rel="stylesheet" media="all" href="https://dz2cdn1.dzone.com/themes/dz20/ftl/icons.css">
+  <link rel="stylesheet" media="all" href="https://dz2cdn1.dzone.com/themes/dz20/lib/static/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" media="all" href="https://dz2cdn1.dzone.com/themes/dz20/ftl/article/global.css">
+  <link rel="stylesheet" media="all" href="https://dz2cdn1.dzone.com/themes/dz20/ftl/header-updated/styles.css">
+  <script defer src="https://dz2cdn1.dzone.com/themes/dz20/lib/alpinejs/3.13.2/cdn.min.js"></script>
+</head>
+<body>
+<header id="ftl-header">
+    <div class="header-top">
+        <div class="header-container">
+    <div class="pull-left logo-container">
+        <div class="logo">
+            <a class="inner" href="/">
+                <picture>
+                    <source srcset="https://dz2cdn1.dzone.com/themes/dz20/images/dz_logo_2021_cropped.webp" type="image/webp">
+                    <source srcset="https://dz2cdn1.dzone.com/themes/dz20/images/dz_logo_2021_cropped.png" type="image/png">
+                    <img src="https://dz2cdn1.dzone.com/themes/dz20/images/dz_logo_2021_cropped.png" width="181" height="56" alt="DZone">
+                </picture>
+            </a>
+        </div>
+    </div>
+
+    <div class="pull-right login-and-search">
+        <div id="authenticated-block" class="logged-in">
+            <div class="welcome-back">Thanks for visiting DZone today,</div>
+            <div id="user-header" class="user-info">
+                <button class="user-avatar">
+                    <span id="header-username" class="username"></span>
+                    <img id="header-avatar" src="" alt="user avatar">
+                </button>
+                <div id="user-dropdown" class="browse-user-menu">
+                    <div class="user-content">
+                        <a id="header-user-plug" href="#" class="user-description"></a>
+                        <a id="header-user-edit" href="#" class="edit-profile">Edit Profile</a>
+                    </div>
+                    <ul class="user-actions">
+                        <li id="first-user-action"><a id="header-dropdown-manage-email" href="#">Manage Email Subscriptions</a></li>
+                        <li>
+                            <a href="/articles/how-to-submit-a-post-to-dzone?utm_source=DZone&utm_medium=user_dropdown&utm_campaign=how_to_post">
+                                How to Post to DZone
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/articles/dzones-article-submission-guidelines">
+                                Article Submission Guidelines
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="bottom">
+                        <a href="/users/logout.html" class="sign-out">Sign Out</a>
+                        <a id="dropdown-view-profile" href="#" class="view-profile">View Profile</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="post-content">
+                <button id="post-button" class="post-content--button">
+                    <span class="post-class">Post</span>
+                    <i class="icon-plus"></i>
+                </button>
+
+                <div id="post-menu" class="posting-links">
+                    <div class="posting-links-menu">
+                        <ul>
+                            <li>
+                                <img src="/themes/dz20/images/dz-postarticle.svg" width="15" height="18" style="width: 15px; height: 18px;">
+                                <a href="/content/article/post.html">Post an Article</a>
+                            </li>
+                            <li>
+                                <a id="drafts-link" href="#">Manage My Drafts</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="unauthenticated-block">
+            <div class="dz-intro">Over 2 million developers have joined DZone.</div>
+            <div class="mobile-invisible sign-in-join">
+                <a href="/users/login.html">Log In</a>
+                <span class="dz-intro-span">/</span>
+                <a href="/static/registration.html">Join</a>
+            </div>
+            <a class="join-icon" href="/users/login.html"><i class="icon-user"></i></a>
+        </div>
+
+        <script>
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('searchDrawer', () => ({
+                    open: false,
+                    query: '',
+                    results: [],
+                    resultCount: 0,
+                    noResults: false,
+                    minCharsMet: false,
+                    searching: false,
+
+                    toggleVisibility() {
+                        this.open = !this.open;
+                        if (this.open) {
+                            this.$nextTick(() => {
+                                this.$refs.query.focus();
+                            });
+                        }
+                    },
+
+                    reset(noResults) {
+                        this.results = [];
+                        this.resultCount = 0;
+                        this.noResults = noResults;
+                    },
+
+                    searchContent() {
+                        if (!this.query || !this.query.length || this.query.length < 3) {
+                            this.reset(false);
+                            this.minCharsMet = false;
+                            return;
+                        }
+                        this.minCharsMet = true;
+                        this.searching = true;
+                        localStorage.setItem('ls.searchValue', this.query);
+                        fetch('/services/widget/header-headerV2/nextPage?pageSize=3&term=' + this.query, {
+                            method: 'GET'
+                        }).then(res => {
+                            this.searching = false;
+                            if (res.ok) {
+                                return res.json();
+                            }
+                            throw new Error('Unexpected response');
+                        }).then(data => {
+                            const results = [];
+                            if (data.result && data.result.data && data.result.data.pages && data.result.data.pages.newest) {
+                                for (let r of data.result.data.pages.newest[1]) {
+                                    results.push({
+                                        title: r.title,
+                                        url: r.url,
+                                        thumbnail: isNaN(r.thumb) ? r.thumb : '/thumbnail?fid=' + r.thumb + '&w=80',
+                                        type: r.type,
+                                        date: new Date(r.articleDate).toLocaleDateString(),
+                                        author: {
+                                            name: r.authors[0].realName,
+                                            url: r.authors[0].url
+                                        }
+                                    });
+                                }
+                            }
+                            this.results = results;
+                            this.resultCount = results.length + (results.length === 1 ? ' result' : ' results');
+                            this.noResults = !results.length;
+                        }).catch(error => {
+                            console.error(error);
+                            this.reset(true);
+                        });
+                    }
+                }));
+            });
+        </script>
+
+        <div class="headerSearch" x-data="searchDrawer()" x-cloak>
+            <button class="icon-search dropdown-toggle" x-on:click="toggleVisibility()"></button>
+            <template x-teleport=".header-container">
+                <div id="search-drawer" x-show="open" x-on:click.outside="open = false" x-transition>
+                    <div class="search-input">
+                        <input type="text"
+                               placeholder="Search"
+                               autofocus="autofocus"
+                               x-model="query"
+                               x-ref="query"
+                               x-on:input.change.debounce.500ms="searchContent()"
+                        >
+                        <button x-on:click="searchContent()" x-bind:disabled="searching">
+                            <span x-show="!searching">Search</span>
+                            <i class="icon icon-spin3 ml-sm anim-spin" x-show="searching"></i>
+                        </button>
+                    </div>
+                    <div class="search-results">
+                        <ul x-show="results.length">
+                            <template x-for="r in results">
+                                <li>
+                                    <div class="result-container">
+                                        <img x-bind:src="r.thumbnail" width="80">
+                                        <div class="result-content">
+                                            <a x-bind:href="r.url" x-text="r.title"></a>
+                                            <div>
+                                                <span x-text="r.type"></span>
+                                                <span x-text="r.date"></span>
+                                                <span>
+                                                <a x-bind:href="r.author.url" x-text="r.author.name"></a>
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                        <div class="no-results" x-show="!minCharsMet">
+                            Please enter at least three characters to search
+                        </div>
+                        <div class="no-results" x-show="noResults && minCharsMet">
+                            No search results
+                        </div>
+                    </div>
+                    <div class="search-footer" x-show="results.length">
+                        <div class="left" x-text="resultCount"></div>
+                        <div class="right">
+                            <a href="/search">View All Results</a>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</div>    </div>
+    <div class="header-bottom">
+        <div class="header-bottom-container">
+            <a class="resource-link" href="/refcardz">Refcards</a>
+            <a class="resource-link" href="/trendreports">Trend Reports</a>
+            <div class="resource-link link-menu">
+                <a href="/events">Events</a>
+                <a href="/events/video-library">Video Library</a>
+            </div>
+        </div>
+    </div>
+    <nav class="header-menu-bar">
+        <div class="header-menu resource-category">
+            <a href="/refcardz">Refcards</a>
+        </div>
+        <div class="header-menu-separator resource-category-separator"></div>
+        <div class="header-menu resource-category">
+            <a href="/trendreports">Trend Reports</a>
+        </div>
+        <div class="header-menu-separator resource-category-separator"></div>
+        <div class="header-menu resource-category no-bottom-radius" tabindex="1" data-click-activation>
+            <p class="menu-label">Events</p>
+            <div class="header-menu-items">
+                <div class="header-menu-columns">
+                    <a class="header-menu-item" href="/events">View Events</a>
+                    <a class="header-menu-item" href="/events/video-library">Video Library</a>
+                </div>
+            </div>
+        </div>
+            <div class="header-menu zone-menu" tabindex="1" data-click-activation>
+                <p class="menu-label">Zones <i class="icon-down-dir icon-closed"></i><i class="icon-right-dir icon-open"></i></p>
+                <div class="header-menu-items">
+                    <div class="header-menu-columns">
+                            <div class="header-menu-column-item">
+                                <a class="header-menu-item" href="/culture-and-methodologies">Culture and Methodologies</a>
+                                        <a class="header-menu-item" href="/agile">Agile</a>
+                                        <a class="header-menu-item" href="/career-development">Career Development</a>
+                                        <a class="header-menu-item" href="/methodologies">Methodologies</a>
+                                        <a class="header-menu-item" href="/team-management">Team Management</a>
+                            </div>
+                            <div class="header-menu-column-item">
+                                <a class="header-menu-item" href="/data-engineering">Data Engineering</a>
+                                        <a class="header-menu-item" href="/ai-ml">AI/ML</a>
+                                        <a class="header-menu-item" href="/big-data">Big Data</a>
+                                        <a class="header-menu-item" href="/data">Data</a>
+                                        <a class="header-menu-item" href="/databases">Databases</a>
+                                        <a class="header-menu-item" href="/iot">IoT</a>
+                            </div>
+                            <div class="header-menu-column-item">
+                                <a class="header-menu-item" href="/software-design-and-architecture">Software Design and Architecture</a>
+                                        <a class="header-menu-item" href="/cloud-architecture">Cloud Architecture</a>
+                                        <a class="header-menu-item" href="/containers">Containers</a>
+                                        <a class="header-menu-item" href="/integration">Integration</a>
+                                        <a class="header-menu-item" href="/microservices">Microservices</a>
+                                        <a class="header-menu-item" href="/performance">Performance</a>
+                                        <a class="header-menu-item" href="/security">Security</a>
+                            </div>
+                            <div class="header-menu-column-item">
+                                <a class="header-menu-item" href="/coding">Coding</a>
+                                        <a class="header-menu-item" href="/frameworks">Frameworks</a>
+                                        <a class="header-menu-item" href="/java">Java</a>
+                                        <a class="header-menu-item" href="/javascript">JavaScript</a>
+                                        <a class="header-menu-item" href="/languages">Languages</a>
+                                        <a class="header-menu-item" href="/tools">Tools</a>
+                            </div>
+                            <div class="header-menu-column-item">
+                                <a class="header-menu-item" href="/testing-deployment-and-maintenance">Testing, Deployment, and Maintenance</a>
+                                        <a class="header-menu-item" href="/deployment">Deployment</a>
+                                        <a class="header-menu-item" href="/devops-and-cicd">DevOps and CI/CD</a>
+                                        <a class="header-menu-item" href="/maintenance">Maintenance</a>
+                                        <a class="header-menu-item" href="/monitoring-and-observability">Monitoring and Observability</a>
+                                        <a class="header-menu-item" href="/testing-tools-and-frameworks">Testing, Tools, and Frameworks</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+                <div class="header-menu parent-category" tabindex="1">
+                    <a href="/culture-and-methodologies">Culture and Methodologies</a>
+                    <div class="header-menu-items">
+                                <a class="header-menu-item" href="/agile">Agile</a>
+                                <a class="header-menu-item" href="/career-development">Career Development</a>
+                                <a class="header-menu-item" href="/methodologies">Methodologies</a>
+                                <a class="header-menu-item" href="/team-management">Team Management</a>
+                    </div>
+                </div>
+                <div class="header-menu-separator parent-category-separator"></div>
+                <div class="header-menu parent-category" tabindex="2">
+                    <a href="/data-engineering">Data Engineering</a>
+                    <div class="header-menu-items">
+                                <a class="header-menu-item" href="/ai-ml">AI/ML</a>
+                                <a class="header-menu-item" href="/big-data">Big Data</a>
+                                <a class="header-menu-item" href="/data">Data</a>
+                                <a class="header-menu-item" href="/databases">Databases</a>
+                                <a class="header-menu-item" href="/iot">IoT</a>
+                    </div>
+                </div>
+                <div class="header-menu-separator parent-category-separator"></div>
+                <div class="header-menu parent-category" tabindex="3">
+                    <a href="/software-design-and-architecture">Software Design and Architecture</a>
+                    <div class="header-menu-items">
+                                <a class="header-menu-item" href="/cloud-architecture">Cloud Architecture</a>
+                                <a class="header-menu-item" href="/containers">Containers</a>
+                                <a class="header-menu-item" href="/integration">Integration</a>
+                                <a class="header-menu-item" href="/microservices">Microservices</a>
+                                <a class="header-menu-item" href="/performance">Performance</a>
+                                <a class="header-menu-item" href="/security">Security</a>
+                    </div>
+                </div>
+                <div class="header-menu-separator parent-category-separator"></div>
+                <div class="header-menu parent-category" tabindex="4">
+                    <a href="/coding">Coding</a>
+                    <div class="header-menu-items">
+                                <a class="header-menu-item" href="/frameworks">Frameworks</a>
+                                <a class="header-menu-item" href="/java">Java</a>
+                                <a class="header-menu-item" href="/javascript">JavaScript</a>
+                                <a class="header-menu-item" href="/languages">Languages</a>
+                                <a class="header-menu-item" href="/tools">Tools</a>
+                    </div>
+                </div>
+                <div class="header-menu-separator parent-category-separator"></div>
+                <div class="header-menu parent-category" tabindex="5">
+                    <a href="/testing-deployment-and-maintenance">Testing, Deployment, and Maintenance</a>
+                    <div class="header-menu-items">
+                                <a class="header-menu-item" href="/deployment">Deployment</a>
+                                <a class="header-menu-item" href="/devops-and-cicd">DevOps and CI/CD</a>
+                                <a class="header-menu-item" href="/maintenance">Maintenance</a>
+                                <a class="header-menu-item" href="/monitoring-and-observability">Monitoring and Observability</a>
+                                <a class="header-menu-item" href="/testing-tools-and-frameworks">Testing, Tools, and Frameworks</a>
+                    </div>
+                </div>
+                <div class="header-menu-separator parent-category-separator"></div>
+    </nav>
+</header>
+
+<script>
+    const csrf = {
+        parameter: 'TH_CSRF',
+        header: 'X-TH-CSRF',
+        token: '-1263662917055974435'
+    }; // set csrf for auth-status script
+</script>
+<script>
+addEventListener('DOMContentLoaded', function() {
+    handleRedirects();
+    handleMenus();
+    // handleSearch(); // re-enable when we move to new top header
+    handleMobileMenuHeights();
+    handleGotoLinks();
+});
+
+function isHidden(element) {
+    try {
+        return window.getComputedStyle(element).display === 'none';
+    } catch (_) {
+        return false;
+    }
+}
+
+function getLink(element) {
+    if (element.hasAttribute('data-goto')) {
+        return element.getAttribute('data-goto');
+    }
+    return element.href;
+}
+
+function isLeftClick(event) {
+    if (event.altKey || event.shiftKey) {
+        return false;
+    } else if ('buttons' in event || 'which' in event) {
+        return event.buttons === 1 || event.which === 1;
+    } else {
+        return (event.button === 1 || (event.type === 'click'));
+    }
+}
+
+function handleRedirects() {
+    const redirections = [...document.querySelectorAll('[data-activate-menu]'), ...document.querySelectorAll('[data-click-target]')];
+
+    redirections.forEach(function(element) {
+        const menuSelector = element.getAttribute('data-activate-menu') || element.getAttribute('data-click-target');
+        const redirectingElement = document.querySelector(menuSelector);
+        if (redirectingElement) {
+            element.style.cursor = 'pointer';
+            const redirect = function(e) {
+                if (redirectingElement.hasAttribute('href') || redirectingElement.hasAttribute('data-goto')) {
+                    if (redirectingElement.hasAttribute('data-new-window') || e.ctrlKey || e.metaKey) {
+                        window.open(getLink(redirectingElement), '_blank');
+                    } else {
+                        window.open(getLink(redirectingElement), '_self');
+                    }
+                } else {
+                    const evt = new e.constructor(e.type, e);
+                    redirectingElement.dispatchEvent(evt);
+                }
+            };
+            element.addEventListener('mouseup', redirect);
+            element.addEventListener('mousedown', (e) => e.preventDefault());
+            element.addEventListener('click', (e) => e.preventDefault());
+        }
+    });
+}
+
+function handleMenus() {
+    const menuElements = [
+        ...document.querySelectorAll('.header-menu > a'),
+        ...document.querySelectorAll('.header-menu > p.menu-label')
+    ];
+
+    let scrollYMemory = -1;
+
+    function scrollToMemory() {
+        if (scrollYMemory !== -1) {
+            setTimeout(function() {
+                window.scrollTo(0, scrollYMemory);
+                scrollYMemory = -1;
+            }, 10);
+        }
+    }
+
+    function hideMenus() {
+        // unfocus menus & items, and set the menus to non-visible.
+        menuElements.forEach(function (element) {
+            element.blur();
+            element.parentElement.blur();
+            element.parentElement.classList.remove('menu-opened');
+            const menuItems = element.parentElement.querySelector('.header-menu-items');
+            if (menuItems) {
+                menuItems.style.display = 'none';
+            }
+        });
+        const wasHidden = document.body.style.overflowY === 'hidden';
+        document.body.style.overflowY = 'auto';
+        if (wasHidden) {
+            scrollToMemory();
+        }
+    }
+
+    function isEventOutsideMenu(e) {
+        return e.target.closest && !e.target.closest('.header-menu') && !e.target.closest('[data-activate-menu]');
+    }
+
+    // Handle mobile menu toggling
+    menuElements.forEach(function(element) {
+        const menu = element.parentElement;
+        const headerItems = menu.querySelector('.header-menu-items');
+        const menuEntries = headerItems ? headerItems.querySelectorAll('.header-menu-item') : [];
+
+        const focus = function() {
+            menu.focus();
+            menu.classList.add('menu-opened');
+            if (headerItems) {
+                headerItems.style.display = 'block';
+            }
+            if (menu.classList.contains('zone-menu')) {
+                scrollYMemory = window.scrollY;
+                document.body.style.overflowY = 'hidden';
+            } else {
+                scrollYMemory = -1;
+            }
+        };
+
+        const unfocus = function() {
+            menu.blur();
+            menu.classList.remove('menu-opened');
+            if (headerItems) {
+                headerItems.style.display = 'none';
+            }
+            const wasHidden = document.body.style.overflowY === 'hidden';
+            document.body.style.overflowY = 'auto';
+            if (wasHidden) {
+                scrollToMemory();
+            }
+        };
+
+        const toggleMenuVisibility = function(e) {
+            if ((e.type === 'click' || e.type === 'mouseup') && !isLeftClick(e)) {
+                e.preventDefault();
+                return;
+            }
+            const hidden = isHidden(headerItems);
+            if (menu.hasAttribute('data-click-activation')) { // handle click activated toggling
+                if (hidden) {
+                    hideMenus(); // hide other open menus first
+                    focus();
+                } else {
+                    unfocus();
+                }
+                e.preventDefault();
+            } else if (hidden) {
+                hideMenus(); // hide other open menus first
+                focus();
+                e.preventDefault(); // prevent 'click' event from firing when menu is hidden
+            }
+        };
+
+        element.addEventListener('touchend', toggleMenuVisibility);
+        element.addEventListener('mouseup', toggleMenuVisibility);
+
+        // Add hover events to non-click-activated menus, even though CSS should cover it.
+        if (!menu.hasAttribute('data-click-activation')) {
+            menu.addEventListener('mouseover', function () {
+                hideMenus(); // hide other open menus first
+                focus();
+            });
+
+            menu.addEventListener('mouseout', function (e) {
+                if (isEventOutsideMenu(e)) {
+                    unfocus();
+                }
+            });
+        }
+
+        // Hide menu when child is clicked
+        menuEntries.forEach(function(menuEntry) {
+            const linkToItem = function(e) {
+                if (e.type === 'mousedown' || e.type === 'click') {
+                    e.preventDefault();
+                    return;
+                }
+                if (e.type === 'mouseup' && !isLeftClick(e)) {
+                    e.preventDefault();
+                    return;
+                }
+                window.open(getLink(menuEntry), (e.ctrlKey || e.metaKey) ? '_blank' : (menuEntry.target || '_self'));
+                unfocus();
+                e.preventDefault();
+            };
+
+            const linkToMobileItem = function(e) {
+                if (e.type === 'touchstart') {
+                    menuEntry.setAttribute('data-touchmove', false);
+                } else if (e.type === 'touchmove') {
+                    menuEntry.setAttribute('data-touchmove', true);
+                } else if (e.type === 'touchend' && (!menuEntry.hasAttribute('data-touchmove') || menuEntry.getAttribute('data-touchmove').toLowerCase() === 'false')) {
+                    window.open(getLink(menuEntry), (e.ctrlKey || e.metaKey) ? '_blank' : (menuEntry.target || '_self'));
+                    unfocus();
+                    e.preventDefault();
+                }
+            };
+
+            menuEntry.addEventListener('mousedown', linkToItem);
+            menuEntry.addEventListener('mouseup', linkToItem);
+            menuEntry.addEventListener('click', linkToItem);
+            menuEntry.addEventListener('touchstart', linkToMobileItem);
+            menuEntry.addEventListener('touchmove', linkToMobileItem);
+            menuEntry.addEventListener('touchend', linkToMobileItem);
+        });
+    });
+
+    function hideIfNonMenuBounds(e) {
+        if (isEventOutsideMenu(e)) {
+            hideMenus();
+        }
+    }
+
+    addEventListener('mousemove', hideIfNonMenuBounds);
+    addEventListener('touchend', hideIfNonMenuBounds);
+    addEventListener('mouseup', hideIfNonMenuBounds);
+    addEventListener('mousedown', hideIfNonMenuBounds);
+    addEventListener('click', hideIfNonMenuBounds);
+}
+
+function handleSearch() {
+    const userBlock = document.querySelector('#ftl-header .header-top .user-block');
+    const loginBlock = document.querySelector('#ftl-header .header-top .user-login');
+    const searchBtn = document.querySelector('#header-search-button');
+    const searchInput = document.querySelector('#header-search-input');
+
+    function showSearch() {
+        userBlock.style.opacity = 0;
+        loginBlock.style.opacity = 0;
+        setTimeout(function() {
+            userBlock.classList.add('hidden');
+            loginBlock.classList.add('hidden');
+            searchInput.value = '';
+            searchInput.style.display = 'unset';
+            setTimeout(function () {
+                searchInput.style.width = '300px';
+                searchInput.focus();
+            });
+        }, 300);
+    }
+
+    function hideSearch() {
+        searchInput.value = '';
+        searchInput.style.width = '0';
+        setTimeout(function() {
+            searchInput.style.display = 'none';
+            userBlock.classList.remove('hidden');
+            loginBlock.classList.remove('hidden');
+            setTimeout(function() {
+                userBlock.style.opacity = 1;
+                loginBlock.style.opacity = 1;
+            }, 100);
+        }, 250);
+    }
+
+    function doSearch() {
+        if (!searchInput || !searchInput.value.length) { // hide search if no content
+            hideSearch();
+        } else if (localStorage) { // execute search
+            localStorage.setItem('ls.searchValue', searchInput.value);
+            window.location = '/search';
+        }
+    }
+
+    function searchClick(e) {
+        if ((e.type === 'click' || e.type === 'mouseup') && !isLeftClick(e)) {
+            e.preventDefault();
+            return;
+        }
+        if (isHidden(searchInput)) { // show search on click when hidden
+            showSearch();
+        } else if (searchInput.value && searchInput.value.length) { // search on click with content
+            doSearch();
+        } else { // hide on click without content
+            hideSearch();
+        }
+    }
+
+    if (searchBtn) {
+        searchBtn.addEventListener('touchend', searchClick);
+        searchBtn.addEventListener('mouseup', searchClick);
+    }
+
+    // Search on enter
+    if (searchInput) {
+        searchInput.addEventListener('keyup', function (e) {
+            if (e.keyCode === 13 || e.code === 'Enter') {
+                doSearch();
+            }
+        });
+    }
+}
+
+function handleMobileMenuHeights() {
+    function setAppHeight() {
+        document.documentElement.style.setProperty('--app-height', window.innerHeight + 'px');
+    }
+
+    addEventListener('resize', function() {
+        setAppHeight();
+    });
+
+    setAppHeight();
+}
+
+function handleGotoLinks() {
+    // Add anchor mimicking to elements with data-goto attributes
+    // This addresses SEO concerns of linking to noindex pages by allowing JS to handle the URL
+    const anchorElements = document.querySelectorAll('*[data-goto]');
+    anchorElements.forEach((anchorElement) => {
+        anchorElement.addEventListener('mouseover', () => {
+            anchorElement.style.cursor = 'pointer';
+            anchorElement.style.textDecoration = 'underline';
+        });
+        anchorElement.addEventListener('mouseout', () => {
+            anchorElement.style.cursor = 'unset';
+            anchorElement.style.textDecoration = 'unset';
+        });
+        anchorElement.addEventListener('mouseup', (e) => {
+            e.preventDefault();
+        });
+        anchorElement.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+        });
+        anchorElement.addEventListener('click', (e) => {
+            e.preventDefault();
+            const anchorHref = anchorElement.getAttribute('data-goto');
+            if (anchorElement.hasAttribute('data-new-window') || e.ctrlKey || e.metaKey) {
+                window.open(anchorHref, '_blank');
+            } else {
+                window.open(anchorHref, '_self');
+            }
+        });
+    });
+}
+</script><script>
+const authenticatedBlock = document.querySelector('#authenticated-block');
+const unauthenticatedBlock = document.querySelector('#unauthenticated-block');
+
+let authenticated = {
+    isAuthenticated: false,
+    isAdmin: false
+};
+
+fetch('/services/internal/data/articles-getAuthenticationStatus', {
+    headers: {
+        'Accept': 'application/json'
+    }
+})
+    .then(function (result) {
+        return result.json()
+    })
+    .then(function (result) {
+        const res = result.result.data
+        if (!res.authenticated) {
+            unauthenticatedBlock.classList.add('shown')
+        } else {
+            bindProps('#header-username', null, null, (res.firstName || res.username), null)
+            bindProps('#header-avatar', null, res.avatar, null, null)
+            bindProps('#header-user-plug', res.profileUrl, null, res.realName, null)
+            bindProps('#header-user-edit', '/users/' + res.id + '/edit.html', null, null, null)
+            bindProps('#header-dropdown-manage-email', '/newsletters/' + res.id + '/manage.html', null, null, null)
+            bindProps('#dropdown-view-profile', res.profileUrl, null, null, null)
+            bindProps('#drafts-link', '/users/' + res.id + '/drafts.html', null, null, null)
+
+            if (res.isAdmin) {
+                // Construct backwards so the #after call places elements in the correct order
+                const firstUserAction = document.querySelector('#first-user-action')
+                const adminConsoleItem = document.createElement('li')
+                const adminConsoleLink = createLink('/dzone/staff/index.html', 'Admin Console')
+                adminConsoleItem.appendChild(adminConsoleLink)
+                firstUserAction.after(adminConsoleItem)
+
+                const moderationItem = document.createElement('li')
+                const moderationLink = createLink('/moderation/list.html', 'Moderation')
+                moderationItem.appendChild(moderationLink)
+                firstUserAction.after(moderationItem)
+            }
+
+            authenticated.isAuthenticated = res.authenticated;
+            authenticated.isAdmin = res.isAdmin;
+
+            authenticatedBlock.classList.add('shown')
+        }
+    }).catch(function (result) {
+        console.error(result)
+})
+
+/**
+ * Binds different properties to the selected element.
+ *
+ * @param selector - Selector to select the element
+ * @param href - href attribute value
+ * @param src - src attribute value
+ * @param innerHTML - innerHTML property value
+ * @param innerText - innerText property value
+ */
+function bindProps(selector, href, src, innerHTML, innerText) {
+    const element = document.querySelector(selector)
+    if (element) {
+        if (href) element.href = href
+        if (src) element.src = src
+        if (innerHTML) element.innerHTML = innerHTML
+        if (innerText) element.innerText = innerText
+    }
+}
+
+/**
+ * Creates a new link element.
+ *
+ * @param href - href attribute value
+ * @param innerText - innerText property value
+ * @returns {HTMLAnchorElement} The generated link element
+ */
+function createLink(href, innerText) {
+    const link = document.createElement('a')
+    link.href = href
+    link.innerText = innerText
+
+    return link
+}
+</script><script>
+const userHeader = document.querySelector('#user-header')
+const userDropdown = document.querySelector('#user-dropdown')
+const postDropdown = document.querySelector('#post-button')
+const postMenu = document.querySelector('#post-menu')
+
+let userDropdownOpen = false
+let postDropdownOpen = false
+
+document.addEventListener('click', function(event) {
+    if (postDropdown && postDropdown.contains(event.target)) {
+        setUserDropdown(false)
+        setPostDropdown(!postDropdownOpen)
+    } else if (userHeader && userHeader.contains(event.target)) {
+        setPostDropdown(false)
+        setUserDropdown(!userDropdownOpen)
+    } else {
+        setUserDropdown(false)
+        setPostDropdown(false)
+    }
+})
+
+function setUserDropdown(value) {
+    userDropdownOpen = value
+    if (userDropdownOpen) {
+        if (userDropdown) {
+            userDropdown.classList.add('open')
+        }
+    } else {
+        if (userDropdown) {
+            userDropdown.classList.remove('open')
+        }
+    }
+}
+
+function setPostDropdown(value) {
+    postDropdownOpen = value
+    if (postDropdownOpen) {
+        if (postMenu) {
+            postMenu.classList.add('open')
+        }
+    } else {
+        if (postMenu) {
+            postMenu.classList.remove('open')
+        }
+    }
+}
+</script>
+<link rel="stylesheet" media="all" href="https://dz2cdn1.dzone.com/themes/dz20/ftl/article/styles.css">
+
+
+
+
+<div id="body-container">
+		<div id="announcement-container-outer">
+			<div id="announcement-previous">
+				<i class="icon-angle-left"></i>
+			</div>
+			<div id="announcement-next">
+				<i class="icon-angle-right"></i>
+			</div>
+			<div id="announcement-container">
+					<div class="announcement announcement-count-4"
+					     data-position="1">
+						<div class="body"><p><strong>Low-Code Development: </strong>Leverage low and no code to streamline your workflow so that you can focus on higher priorities.</p></div>
+						<div class="spacer"></div>
+						<a href="https://dzone.com/link/2024-tr-low-code-announcement" target="_self">
+							<button>Download the NEW Trend Report</button>
+						</a>
+					</div>
+						<div class="separator"></div>
+					<div class="announcement announcement-count-4"
+					     data-position="2">
+						<div class="body"><p><strong>DZone Security Research: </strong>Tell us your top security strategies in 2024, influence our research, and enter for a chance to win $!</p></div>
+						<div class="spacer"></div>
+						<a href="https://survey.alchemer.com/s3/7895580/dzann" target="_blank">
+							<button>Take the Survey</button>
+						</a>
+					</div>
+						<div class="separator"></div>
+					<div class="announcement announcement-count-4"
+					     data-position="3">
+						<div class="body"><p><strong>Launch your software development career: </strong>Dive head first into the SDLC and learn how to build high-quality software and teams.</p></div>
+						<div class="spacer"></div>
+						<a href="https://link.technologyadvice.com/r/coursera-software-development-lifecycle-dz-announcement-bar" target="_blank">
+							<button>Start the Course</button>
+						</a>
+					</div>
+						<div class="separator"></div>
+					<div class="announcement announcement-count-4"
+					     data-position="4">
+						<div class="body"><p><strong>Open Source Migration Practices and Patterns</strong>: Explore key traits of migrating open-source software and its impact on software development.</p></div>
+						<div class="spacer"></div>
+						<a href="https://dzone.com/link/2024-opensource-migration-rc-announcement" target="_self">
+							<button>Read the Refcard</button>
+						</a>
+					</div>
+			</div>
+		</div>
+	<script type="text/javascript" async>
+(function() {
+    let announcementPosition = 1;
+    let minAnnouncementPosition = -1;
+    let maxAnnouncementPosition = -1;
+
+    const announcementPrevBtn = document.querySelector('#announcement-previous');
+    const announcementNextBtn = document.querySelector('#announcement-next');
+
+    function withAnnouncements(callback) {
+        const announcements = document.querySelectorAll('#announcement-container .announcement');
+        for (let announcement of announcements) {
+            callback(announcement);
+        }
+    }
+
+    function initAnnouncementVars() {
+        document.querySelector(':root').style.setProperty('--mobile-announcement-separator-width', '1px');
+        withAnnouncements(function(announcement) {
+            const pos = parseInt(announcement.getAttribute('data-position'));
+            minAnnouncementPosition = minAnnouncementPosition === -1 ? pos : Math.min(minAnnouncementPosition, pos);
+            maxAnnouncementPosition = maxAnnouncementPosition === -1 ? pos : Math.max(maxAnnouncementPosition, pos);
+        });
+
+        if (document.querySelector('.announcementBarContainer')) {
+            document.querySelector(':root').style.setProperty('--body-top-padding', '0');
+        }
+
+        if (maxAnnouncementPosition <= 0) {
+            document.querySelector(':root').style.setProperty('--body-top-padding', '0');
+        }
+
+        sizeToFullWhenOneEntryOnMobile();
+    }
+
+    function setAnnouncementPosition(position) {
+        if (window.outerWidth >= 890) {
+            return; // we do not need to change the position, since we can display everything on desktop.
+        }
+
+        // Make the announcement cyclical
+        if (minAnnouncementPosition !== -1 && maxAnnouncementPosition !== -1) {
+            if (position > maxAnnouncementPosition) {
+                position = minAnnouncementPosition; // overflow to the first announcement
+            } else if (position < minAnnouncementPosition) {
+                position = maxAnnouncementPosition; // underflow to the last announcement
+            }
+            announcementPosition = position;
+        }
+
+        const shownAnnouncements = [];
+
+        let reverseFlex = false; // should only be true when the first and last items are showing
+
+        // Now that the position is valid, apply the transforms
+        withAnnouncements(function(announcement) {
+            const pos = parseInt(announcement.getAttribute('data-position'));
+            const isWrapped = position === maxAnnouncementPosition && pos === minAnnouncementPosition; // showing first + last at same time
+            const doesNextQualify = window.outerWidth >= 500 && (pos === position + 1 || isWrapped);
+
+            if (pos === position || doesNextQualify) {
+                shownAnnouncements.push(announcement);
+            } else {
+                announcement.style.display = 'none';
+            }
+
+            announcement.style.opacity = 0.0;
+
+            if (isWrapped) {
+                reverseFlex = true;
+            }
+        });
+
+        for (let announcement of shownAnnouncements) {
+            announcement.style.display = 'flex';
+            announcement.style.opacity = 1.0;
+        }
+
+        const announcementContainer = document.querySelector('#announcement-container');
+        if (announcementContainer) {
+            announcementContainer.style.flexDirection = reverseFlex ? 'row-reverse' : 'row';
+        }
+    }
+
+    function resetAnnouncements() {
+        announcementPosition = 1;
+        const announcementContainer = document.querySelector('#announcement-container');
+        if (announcementContainer) {
+            announcementContainer.style.flexDirection = 'row';
+        }
+        withAnnouncements(function(announcement) {
+            announcement.style.opacity = 1.0;
+            announcement.style.display = 'flex';
+        });
+    }
+
+    function sizeToFullWhenOneEntryOnMobile() {
+        if (maxAnnouncementPosition <= 2 && announcementPrevBtn && announcementNextBtn) {
+            announcementPrevBtn.style.display = maxAnnouncementPosition === 2 && window.outerWidth < 500 ? 'flex' : 'none';
+            announcementNextBtn.style.display = maxAnnouncementPosition === 2 && window.outerWidth < 500 ? 'flex' : 'none';
+        }
+        if (maxAnnouncementPosition === 1 && window.outerWidth >= 500 && window.outerWidth < 890) {
+            document.querySelector(':root').style.setProperty('--mobile-announcement-separator-width', '0');
+            document.querySelector('#announcement-container .announcement').style.maxWidth = '100%';
+        }
+    }
+
+    function resetAnnouncementsOnResize() {
+        announcementPosition = 1; // we want to reset the announcement position every resize
+        if (window.outerWidth >= 890) { // 4 announcements can be shown (215px * 4) + separator padding
+            resetAnnouncements();
+        } else { // if we're still on mobile, set the position to normalize things after resize
+            setAnnouncementPosition(announcementPosition);
+            sizeToFullWhenOneEntryOnMobile();
+        }
+    }
+
+    window.addEventListener('resize', resetAnnouncementsOnResize);
+
+    initAnnouncementVars();
+    setAnnouncementPosition(announcementPosition); // sets the min & max positions as well as initializes transforms
+
+    if (announcementPrevBtn) {
+        announcementPrevBtn.onclick = function() {
+            setAnnouncementPosition(announcementPosition - 1);
+        };
+    }
+
+    if (announcementNextBtn) {
+        announcementNextBtn.onclick = function() {
+            setAnnouncementPosition(announcementPosition + 1);
+        };
+    }
+})();	</script>
+  <div id="ftl-article" class="trending-article-body">
+      <div class="trending-sidebar">
+        <div class="trending">
+          <h3>Related</h3>
+          <div class="trending-separator"></div>
+          <ul>
+              <li class="item">
+                <a href="/articles/how-to-build-web-service-using-spring-boot-2x" class="related-link">How To Build Web Service Using Spring Boot 2.x</a>
+              </li>
+              <li class="item">
+                <a href="/articles/new-orm-framework-for-kotlin" class="related-link">New ORM Framework for Kotlin</a>
+              </li>
+              <li class="item">
+                <a href="/articles/creating-scalable-openai-gpt-applications-in-java" class="related-link">Creating Scalable OpenAI GPT Applications in Java</a>
+              </li>
+              <li class="item">
+                <a href="/articles/keep-your-application-secrets-secret" class="related-link">Keep Your Application Secrets Secret</a>
+              </li>
+          </ul>
+        </div>
+      </div>
+    <div class="container-fluid body trending-article-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="articles-wrap">
+                <div class="ad-container">
+                  <div id="div-gpt-ad-1435246566686-0" class="ads-billboard-article" data-gpt-slot="top"></div>
+                </div>
+
+
+            <div class="article-stream widget-top-border">
+                <div class="content-right-images">
+                  <div id="div-gpt-ad-1435246566686-2" class="sidebar-ad" data-gpt-desktop="true" data-gpt-slot="sidebar1"></div>
+                    <div class="trending-separator"></div>
+                    <div class="trending">
+                      <h3>Trending</h3>
+                      <ul>
+                          <li class="item">
+                            <a href="/articles/generate-object-mapping-using-mapstruct" class="trending-link" target="_self">Generate Object Mapping Using MapStruct</a>
+                          </li>
+                          <li class="item">
+                            <a href="/articles/how-to-plan-a-successful-mulesoft-vpn-migration-2" class="trending-link" target="_self">How To Plan a (Successful) MuleSoft VPN Migration (Part II)</a>
+                          </li>
+                          <li class="item">
+                            <a href="/articles/custom-health-checks-in-spring-boot" class="trending-link" target="_self">Custom Health Checks in Spring Boot</a>
+                          </li>
+                          <li class="item">
+                            <a href="/articles/10-chatgpt-prompts-to-boost-developer-productivity" class="trending-link" target="_self">10 ChatGPT Prompts To Boost Developer Productivity</a>
+                          </li>
+                      </ul>
+                    </div>
+                </div>
+                <script type="application/ld+json">
+                  {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "Java Content Repository: The Best Of Both Worlds",
+                    "author": [{"image":{"@type":"ImageObject","caption":"Bertrand Delacretaz","url":"https://secure.gravatar.com/avatar/d244e495717742bd0776b715a45877eb?d=identicon&r=PG"},"@type":"Person","worksFor":{"@type":"Organization","name":"Day Software"},"name":"Bertrand Delacretaz","url":"https://dzone.com/users/563137/bdelacretaz.html"}],
+                    "audience": "software developers",
+                    "keywords": "java,jcr,json",
+                    "timeRequired": "PT8M",
+                    "commentCount": 5,
+                    "wordCount": "1861",
+                    "accessMode": "textual, visual",
+                    "datePublished": "2010-01-04T00:00:00Z",
+                    
+                    "articleSection": "java-jdk-development-tutorials-tools-news",
+                    "publisher": {
+                      "@type": "Organization",
+                      "name": "DZone",
+                      "url": "https://dzone.com",
+                      "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://dzone.com/themes/dz20/images/dz_logo_2021_cropped.png"
+                      }
+                    },
+                    "articleBody": "Here's a short introduction to JCR, the Java Content Repository. Instead of going into details about the API, we'll just explain the bare minimum to allow you to get a feel for how JCR works and how it is used. As shown in the picture below, JCR combines attributes of file systems and databases, and arguably provides the best of both worlds: using paths to locate atoms of contents, creating micro-trees to manage units of content, and still having database features like structured and full-text queries, transactions and optional schema constraints, creates a very powerful combination that's quite unique in the world of content management. What is JCR? According to JSR 283, the Java Content Repository API defines an abstract model and a Java API for data storage and related services commonly used by content-oriented applications. JSR 283, released in 2009, is \"V2.0\" of the spec, and follows on JSR 170 which was released back in 2005. We'll talk about JSR 283 here, but if your repository \"only\" supports JSR 170 that won't make a difference for our simple examples. The JCR storage model is a tree of nodes and properties: nodes (addressable by path like in a filesystem) are used to organize the content, and named properties store the actual data, either as simple types (string, boolean, number, etc.) or as binary streams for storing files of arbitrary size. As an example, here's how an image file can be stored in JCR: { \"jcr:primaryType\": \"nt:file\", \"jcr:created\": \"Fri Dec 18 2009 13:45:03 GMT+0100\", \"jcr:content\": { \"jcr:primaryType\": \"nt:resource\" \":jcr:data\": 6269, \"jcr:mimeType\": \"image/png\", \"jcr:lastModified\": \"Fri Dec 18 2009 13:44:51 GMT+0100\", } That JSON representation comes from Apache Sling, an application framework that provides a simple HTTP API on top of a JCR repository. We'll use Sling for our examples, as its HTTP requests and responses are easy to visualize here, but you could of course get the same results using the bare JCR API. We won't explain the Sling HTTP API in detail, for more details have a look at the Sling in 15 minutes tutorial. The above JSON shows that our file is stored as a node of type nt:file, which is one of the standard JSR 283 node types. The name of that node (not shown in our example) is the filename, and the node contains a child node of type nt:resource (another standard node type), named jcr:content. The file data itself is stored in the jcr:data binary property of the jcr:content node, and that node has a few other properties that provide the file size, last modification date and mime-type. In JCR, node types can optionally be used to define constraints on the node content models. As an example, here's the definition of the nt:resourcetype, straight from the JSR 283 spec: [nt:resource] &gt; mix:mimeType, mix:lastModifiedprimaryitem jcr:data- jcr:data (BINARY) mandatory What this means is that the nt:resource type inherits the definitions of the mix:mimeType and mix:lastModified node types, and in addition requires a binary property named jcr:data. The mix:* types use similar definitions to specify the names and types of the jcr:mimeType and jcr:lastModified properties. This simple example shows how JCR splits things in nodes and properties, and as you can imagine using the right structures (or \"micro-trees\") to store your own content will help a lot in making things efficient and flexible. David's model will tell you more about this. Unstructured content Having precise definitions of content models, as in the file storage example, is very useful for content that has a well defined and stable structure. Binary files definitely fall into this category, but how about your own content? Having to define such node types for all your content would be painful, especially when you're prototyping or exploring JCR. The nt:unstructured node type comes to the rescue by allowing a node to have any properties and child nodes of any type. Let's see an example, again using Sling's HTTP interface to create content. $ curl -D - -F \"title=hello, JCR\" http://admin:admin@localhost:8888/fooHTTP/1.1 200 OKContent-Type: text/html; charset=utf-8...$ curl http://admin:admin@localhost:8888/foo.tidy.infinity.json{ \"title\": \"hello, JCR\", \"jcr:primaryType\": \"nt:unstructured\"} Using Sling's HTTP interface via curl (with -F for a POST request, without that for a GET), we create a node at /foo, with a single title property. To read the node, we make an HTTP GET request using the /foo.tidy.infinity.json path, which tells Sling to return a formatted JSON representation of the /foo node and all its child nodes and properties. The JSON output of that request shows that the node has been created with the nt:unstructured type, so we should be able to add any content to it. Let's try that. $ curl -D - \\ -F \"text/content=This is some text\" \\ http://admin:admin@localhost:8888/fooHTTP/1.1 200 OK... $ curl http://admin:admin@localhost:8888/foo.tidy.infinity.json{ \"title\": \"hello, JCR\", \"jcr:primaryType\": \"nt:unstructured\", \"text\": { \"content\": \"This is some text\", \"jcr:primaryType\": \"nt:unstructured\" } The first request is a POST that asks Sling to add some content at the text/content path relative to the /foo node, and we see from the JSON output that this creates another nt:unstructured node under /foo. Note that we didn't have to define any content model to do that, the beauty of nt:unstructured is that it lets you play with content without constraints. Could we add a file under our /foo node? You bet! Using Sling's WebDAV interface (provided by Jackrabbit), we just have to navigate to /foo/text, which appears as a folder in the WebDAV explorer, and copy our file under that. $ curl http://admin:admin@localhost:8888/foo.tidy.infinity.json{ \"title\": \"hello, JCR\", \"jcr:mixinTypes\": [ \"mix:lockable\" ], \"jcr:primaryType\": \"nt:unstructured\", \"text\": { \"jcr:mixinTypes\": [ \"mix:lockable\" ], \"content\": \"This is some text\", \"jcr:primaryType\": \"nt:unstructured\", \"image1.jpg\": { \"jcr:mixinTypes\": [ \"mix:lockable\" ], \"jcr:created\": \"Fri Dec 18 2009 14:31:32 GMT+0100\", \"jcr:primaryType\": \"nt:file\", \"jcr:content\": { \"jcr:uuid\": \"189d6fef-8c50-41c7-83c5-88026c78907d\", \":jcr:data\": 21784, \"jcr:mimeType\": \"image/jpeg\", \"jcr:lastModified\": \"Fri Dec 18 2009 14:31:32 GMT+0100\", \"jcr:primaryType\": \"nt:resource\" } } } Once that's done, we see that the image1.jpg file has been added as an nt:file node alongside the content node that we created before, with a similar structure than in our first example above. This simple example shows the power of JCR when it comes to combining different types of content. What we have created is a micro-tree of content that could represent a blog post, with attachments, comments etc. all stored under the same base path, with a combination of free-form and strictly structured data. That's quite a powerful way of creating agile content-based applications in a data-first way. The API: Nodes and Properties Let's give a quick overview of the main elements of the APIs, the ones that you use to create and retrieve content. In our examples, Sling uses those under the hood to process HTTP requests. First, you need to acquire a Repository object. There are various ways of doing this, in Jackrabbit's case you can use a TransientRepository class to simplify setup for simple experiments. The Repository class allows you to login and get a Session, which in turn allows you to create and retrieve content. The Session is tied to a Workspace - each workspace can store a distinct tree of nodes and properties, but for our simple examples we'll just use the default workspace. Repository repository = new TransientRepository(); Session session = repository.login(...); Now that we have a Session, we can access the root node of the tree, and create a simple subtree with a /hello/world node that has a message property saying Hello, JCR World!. Node root = session.getRootNode(); Node hello = root.addNode(\"hello\"); Node world = hello.addNode(\"world\"); world.setProperty(\"message\", \"Hello, JCR World!\"); session.save(); Note the session.save() call at the end. JCR uses a transient space to prepare changes before saving them, providing a simplified transaction-like mechanism that's often sufficient when working with content. Real transactions are also possible with JCR, if needed. Let's retrieve the node that we just created: Node node = root.getNode(\"hello/world\"); System.out.println(node.getPath()); System.out.println(node.getProperty(\"message\").getString()); Quite straightforward: we just address the node by its full path relative to the root, and print out its path and the value of its message property. This would output /hello/world and Hello, JCR World!. The JCR API provides much more than the few simple interfaces shown here, but those are by far the most widely used parts of the API. I haven't checked but I'd guess 95% of the JCR API calls that we use in our content management products involve just the Node and Property interfaces. Going further Although we have just scratched the surface of JCR, the concepts exposed here are probably the most important ones: Combining unstructured and structured content provides a lot of flexibility, and content model constraints can be used selectively where they make sense. In terms of storage flexibility, think XML - but without the dreaded angle brackets. The storage model uses simple Node and Property interfaces, no need to study tons of documentation to use it. The API leads to fairly readable code, and although object-to-content mappers are available for JCR they are usually not necessary. Working directly with micro-trees is straightforward and close to the domain model of structured content. To go further, the best might be to read the JSR 283 spec itself. API specifications are usually not one's favorite bedtime reading, but this one is surprisingly readable. I would not read it linearly however, and suggest the following reading order: The Reading chapter explains the various ways in which Nodes and properties can be accessed, using tree navigation. The Query chapter that follows explains how to query the JCR repository. Good content models allow you to go a long way without using queries, but they are obviously also needed at some point. The Writing chapter comes next in my opinion, as you'll obviously want to create some content! I would then suggest studying at least the Observation chapter, as getting selective callbacks when content is created or modified is very powerful and might be a bit unusual. At this point, you would have most of the tools required to manage content, the rest of the spec's features are certainly useful but you might not need all of them. It took me a while to really grasp JCR and use it effectively in my content management activities, but I'm not going back to the often messy world of hybrid databases and files and message queues and a few others things content management architecture. I like what my colleague Lars Trieloff sometimes calls the Zero Bullshit Architecture much better! Author bio Bertrand Delacretaz works as a senior developer in Day Software's R&amp;D group, using open source tools to create world-class content management systems. Bertrand is a member of the Apache software foundation, served on its Board of Directors from 2008 to 2009, and is involved in a number of Apache projects related to content management. References [1] JSR 283 spec, and the older JSR 170 [2] Apache Jackrabbit - JCR reference implementation. [3] Apache Sling - Web framework for JCR content repositories. [4] Discover Sling in 15 minutes, tutorial using Sling's HTTP API. [5] The Zero Bullshit Architecture, Slides by Lars Trieloff. [6] David's Model - a guide for blissful content modeling, by the JCR Spec Lead, David Nuescheler. [7] Slide from my JCR in 10 minutes presentation. That slide was originally created by David Nuescheler.",
+                    "mainEntityOfPage": {
+                      "@type": "WebPage",
+                      "@id": "https://dzone.com/articles/java-content-repository-best"
+                    },
+                    "image": {
+                      "@type": "ImageObject",
+                      "url": "https://dz2cdn1.dzone.com/storage/article-thumb/13833-thumb.jpg"
+                    }
+                  }
+                </script>
+
+	<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "DZone",
+            "item": "https://dzone.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Data Engineering",
+            "item": "https://dzone.com/data-engineering"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Databases",
+            "item": "https://dzone.com/databases"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Java Content Repository: The Best Of Both Worlds",
+            "item": "https://dzone.com/articles/java-content-repository-best"
+          }
+      ]
+    }
+
+	</script>
+
+              <article>
+                <div class="content">
+                  <div class="header">
+	<ol class="breadcrumb">
+				<li class="server"><a href="https://dzone.com">DZone</a></li>
+				<li class="server"><a href="https://dzone.com/data-engineering">Data Engineering</a></li>
+				<li class="server"><a href="https://dzone.com/databases">Databases</a></li>
+				<li class="active server">Java Content Repository: The Best Of Both Worlds</li>
+	</ol>
+
+
+                    <div class="header-title">
+                      <div class="title">
+                        <h1 class="article-title">Java Content Repository: The Best Of Both Worlds</h1>
+                      </div>
+
+                      <div class="subhead">
+                        <h3>Learn the basics of Java Content Repositories, including how they work, and how they're used.</h3>
+                      </div>
+
+                      <div class="publish-meta">
+                        By<span style="user-select: none;">&nbsp;</span>
+  <div class="article-author-meta">
+    <img src="https://secure.gravatar.com/avatar/d244e495717742bd0776b715a45877eb?d=identicon&r=PG" class="avatar" alt="Bertrand Delacretaz user avatar" width="40">
+    <div class="author-info">
+      <span class="author-name">
+        <a href="/users/563137/bdelacretaz.html" rel="nofollow">Bertrand Delacretaz</a>
+      </span>
+    </div>
+
+
+
+    &middot;
+  </div>
+                        <span class="author-date">
+                          Jan. 04, 10
+                        </span>
+                        &middot;
+                        <span>Opinion</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="author-n-useraction">
+                    <div class="like action">
+                      <div id="activity-like-icon" class="dz-like icon-thumbs-up">
+                        <span class="action-label">
+                          <span id="activity-like-text">Like</span>
+                        </span>
+                        <a href="#">
+                          <span id="activity-like-counter">(5)</span>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="action comment-action">
+
+                      <button class="comment">
+                        <i class="icon-comment"></i>
+                        Comment
+                        <span id="activity-comment-counter" class="comment-count"></span>
+                      </button>
+                    </div>
+
+                    <div class="save action">
+                      <div id="activity-save-icon" class="save icon-star-empty">
+                        <span id="activity-save-text" class="action-label">Save</span>
+                      </div>
+                    </div>
+
+                    <div class="tweet action">
+                      <a id="tweet-link" href="" class="title" target="_blank">
+                        <span><i class="icon-twitter"></i></span>
+                        <span class="action-label">Tweet</span>
+                      </a>
+                    </div>
+
+                    <div class="linkedin action">
+                      <a id="linkedin-link" href="https://www.linkedin.com/sharing/share-offsite/?url=https://dzone.com/articles/java-content-repository-best" class="title" target="_blank">
+                        <span><i class="icon-linkedin-1"></i></span>
+                        <span class="action-label">Share</span>
+                      </a>
+                    </div>
+
+                    <div class="right-most">
+                      <div id="activity-view-container" class="article-views action">
+                        <i class="icon-eye"></i> 141.8K
+                        <span class="action-label">Views</span>
+                      </div>
+                    </div>
+                  </div>
+
+                      <div class="signin-prompt">
+                        <p>Join the DZone community and get the full member experience.</p>
+                        <a id="article-signin-prompt" href="/static/registration.html">Join For Free</a>
+                      </div>
+                      <div class="arrow-down"></div>
+
+                    <div id="top-bumper-container"></div>
+
+                  <div>
+                    <div class="content-html"><p pid="769"> Here's a short introduction to JCR, the Java Content Repository. Instead of going into details about the API, we'll just explain the bare minimum to allow you to get a feel for how JCR works and how it is used. </p><p pid="770">As shown in the picture below, JCR combines attributes of file systems and databases, and arguably provides the  <em>best of both worlds</em>: using paths to locate atoms of contents, creating micro-trees to manage units of content, and still having database features like structured and full-text queries, transactions and optional schema constraints, creates a very powerful combination that's quite unique in the world of content management.   </p><p pid="771"><img alt="" class="fr-dii fr-fil" height="400" src="/sites/all/files/jcr-best-of-both-worlds.jpg" width="500"></p><h2>What is JCR?</h2><p pid="772"> According to <a href="http://jcp.org/en/jsr/detail?id=283">JSR 283</a>, the <em>Java Content Repository API</em> defines <em>an abstract model  and a Java API for data storage and related services commonly used by content-oriented applications</em>.  </p><p pid="773"> JSR 283, released in 2009, is "V2.0" of the spec, and follows on JSR 170 which was released back in 2005.  We'll talk about JSR 283 here, but if your repository "only"  supports JSR 170 that won't make a difference for our simple examples. </p><p pid="774">  The JCR storage model is a tree of nodes and properties: nodes (addressable by path like in a filesystem) are used  to organize the content, and named properties store the actual data, either as simple types (string, boolean,  number, etc.) or as binary streams for storing files of arbitrary size.  </p><p pid="775"> As an example, here's how an image file can be stored in JCR: </p><pre class="brush:shell">{  "jcr:primaryType": "nt:file",  "jcr:created": "Fri Dec 18 2009 13:45:03 GMT+0100",  "jcr:content": {    "jcr:primaryType": "nt:resource"    ":jcr:data": 6269,    "jcr:mimeType": "image/png",    "jcr:lastModified": "Fri Dec 18 2009 13:44:51 GMT+0100",  }}</pre><p pid="776"> That JSON representation comes from <a href="http://sling.apache.org/"><em>Apache Sling</em></a>, an application framework that provides a simple HTTP API on top of a JCR repository. We'll use Sling for our examples, as its HTTP requests and responses are easy to visualize here, but you could of course get the same results using the bare JCR API. We won't explain the Sling HTTP API in detail, for more details have a look at the <a href="http://sling.apache.org/site/discover-sling-in-15-minutes.html"><em>Sling in 15 minutes</em></a> tutorial.  </p><p pid="777"> The above JSON shows that our file is stored as a node of type <em>nt:file</em>, which is one of the standard JSR 283  node types. The name of that node (not shown in our example) is the filename, and the node contains a child node of type <em>nt:resource</em> (another standard node type), named <em>jcr:content</em>.  </p><p pid="778"> The file data itself is stored in the <em>jcr:data</em> binary property of the <em>jcr:content</em> node, and that  node has a few other properties that provide the file size, last modification date and mime-type.    </p><p pid="779"> In JCR, node types can optionally be used to define constraints on the node content models. As an example, here's  the definition of the <em>nt:resource</em>type, straight from the JSR 283 spec:  </p><pre>[nt:resource] &gt; mix:mimeType, mix:lastModifiedprimaryitem jcr:data- jcr:data (BINARY) mandatory</pre><p pid="780"> What this means is that the <em>nt:resource</em> type inherits the definitions of the <em>mix:mimeType</em> and  <em>mix:lastModified</em> node types, and in addition requires a binary property named <em>jcr:data</em>. The <em>mix:*</em> types use similar definitions to specify the names and types of the <em>jcr:mimeType</em> and <em>jcr:lastModified</em> properties. </p><p pid="781">  This simple example shows how JCR splits things in nodes and properties, and as you can imagine using the right structures (or "micro-trees") to store your own content will help a lot in making things efficient and flexible. <a href="http://wiki.apache.org/jackrabbit/DavidsModel"><em>David's model</em></a>&nbsp; will tell you more about this.   </p><h2>Unstructured content</h2><p pid="782"> Having precise definitions of content models, as in the file storage example, is very useful for content that has a well defined and stable structure. Binary files definitely fall into this category, but how about your own content? </p><p pid="783"> Having to define such node types for all your content would be painful, especially when you're prototyping or  exploring JCR. The <em>nt:unstructured</em> node type comes to the rescue by allowing a node to have any properties  and child nodes of any type. Let's see an example, again using Sling's HTTP interface to create content. </p><pre class="brush:shell">$ curl -D - -F "title=hello, JCR" http://admin:admin@localhost:8888/fooHTTP/1.1 200 OKContent-Type: text/html; charset=utf-8...$ curl http://admin:admin@localhost:8888/foo.tidy.infinity.json{  "title": "hello, JCR",  "jcr:primaryType": "nt:unstructured"}</pre><p pid="784"> Using Sling's HTTP interface via <em>curl</em> (with <em>-F</em> for a POST request, without that for a GET), we  create a node at <em>/foo</em>, with a single <em>title</em> property.   </p><p pid="785"> To read the node, we make an HTTP GET request using the <em>/foo.tidy.infinity.json</em> path, which tells Sling to return a formatted JSON representation of the <em>/foo</em> node and all its child nodes and properties. </p><p pid="786"> The JSON output of that request shows that the node has been created with the <em>nt:unstructured</em> type, so we should be able to add any content to it. Let's try that.  </p><pre class="brush:shell">$ curl -D - \  -F "text/content=This is some text" \  http://admin:admin@localhost:8888/fooHTTP/1.1 200 OK...  $ curl http://admin:admin@localhost:8888/foo.tidy.infinity.json{  "title": "hello, JCR",  "jcr:primaryType": "nt:unstructured",  "text": {    "content": "This is some text",    "jcr:primaryType": "nt:unstructured"  }}</pre><p pid="787"> The first request is a POST that asks Sling to add some content at the <em>text/content</em> path relative to the <em>/foo</em> node, and we see from the JSON output that this creates another <em>nt:unstructured</em> node under <em>/foo</em>. Note that we didn't have to define any content model to do that, the beauty of    <em>nt:unstructured</em> is that it lets you play with content without constraints.  </p><p pid="788"> Could we add a file under our <em>/foo</em> node? You bet! Using Sling's WebDAV interface (provided by Jackrabbit), we just have to navigate to <em>/foo/text</em>, which appears as a folder in the WebDAV explorer, and copy our file under that. </p><pre class="brush:shell">$ curl http://admin:admin@localhost:8888/foo.tidy.infinity.json{  "title": "hello, JCR",  "jcr:mixinTypes": [    "mix:lockable"  ],  "jcr:primaryType": "nt:unstructured",  "text": {    "jcr:mixinTypes": [      "mix:lockable"    ],    "content": "This is some text",    "jcr:primaryType": "nt:unstructured",    "image1.jpg": {      "jcr:mixinTypes": [        "mix:lockable"      ],      "jcr:created": "Fri Dec 18 2009 14:31:32 GMT+0100",      "jcr:primaryType": "nt:file",      "jcr:content": {        "jcr:uuid": "189d6fef-8c50-41c7-83c5-88026c78907d",        ":jcr:data": 21784,        "jcr:mimeType": "image/jpeg",        "jcr:lastModified": "Fri Dec 18 2009 14:31:32 GMT+0100",        "jcr:primaryType": "nt:resource"      }    }  }}</pre><p pid="789"> Once that's done, we see that the <em>image1.jpg</em> file has been added as an <em>nt:file</em> node alongside the <em>content</em> node that we created before, with a similar structure than in our first example above.  </p><p pid="790"> This simple example shows the power of JCR when it comes to combining different types of content. What we have created is a <em>micro-tree</em> of content that could represent a blog post, with attachments, comments etc. all stored under the same base path, with a combination of free-form and strictly structured data.  That's quite a powerful way of creating agile  content-based applications in a <em>data-first</em> way. </p><h2>The API: Nodes and Properties</h2><p pid="791"> Let's give a quick overview of the main elements of the APIs, the ones that you use to create and retrieve content. In our examples, Sling uses those under the hood to process HTTP requests.   </p><p pid="792"> First, you need to acquire a <em>Repository</em> object. There are various ways of doing this, in Jackrabbit's case you can use a <em>TransientRepository</em> class to simplify setup for simple experiments. </p><p pid="793"> The <em>Repository</em> class allows you to login and get a <em>Session</em>, which in turn allows you to create and retrieve content. The <em>Session</em> is tied to a <em>Workspace</em> - each workspace can store a distinct tree of nodes and properties, but for our simple examples we'll just use the default workspace.  </p><pre class="brush:java">Repository repository = new TransientRepository(); Session session = repository.login(...); </pre><p pid="794"> Now that we have a <em>Session</em>, we can access the root node of the tree, and create a simple subtree with a <em>/hello/world</em> node that has a <em>message</em> property saying <em>Hello, JCR World!</em>.  </p><pre class="brush:java">Node root = session.getRootNode(); Node hello = root.addNode("hello"); Node world = hello.addNode("world"); world.setProperty("message", "Hello, JCR World!"); session.save(); </pre><p pid="795"> Note the <em>session.save()</em> call at the end. JCR uses a <em>transient space</em> to prepare changes before saving them, providing a simplified transaction-like mechanism that's often sufficient when working with content. Real transactions are also possible with JCR, if needed. </p><p pid="796">  Let's retrieve the node that we just created:  </p><pre class="brush:java">Node node = root.getNode("hello/world"); System.out.println(node.getPath()); System.out.println(node.getProperty("message").getString());</pre><p pid="797"> Quite straightforward: we just address the node by its full path relative to the root, and print out its path and the value of its message property. This would output <em>/hello/world</em> and  <em>Hello, JCR World!</em>.  </p><p pid="798">  The JCR API provides much more than the few simple interfaces shown here, but those are by far the most widely used parts of the API. I haven't checked but I'd guess 95% of the JCR API calls that we use in our content management products involve just the Node and Property interfaces. </p><h2>Going further</h2><p pid="799"> Although we have just scratched the surface of JCR, the concepts exposed here are probably the most important ones: </p><ul><li> Combining unstructured and structured content provides a lot of flexibility, and content model constraints  can be used selectively where they make sense. In terms of storage flexibility, think XML - but without the dreaded angle brackets.  </li><li> The storage model uses simple Node and Property interfaces, no need to study tons of documentation to use it.  </li><li> The API leads to fairly readable code, and although object-to-content mappers are available for JCR they are usually not necessary. Working directly with micro-trees is straightforward and close to the  domain model of structured content. </li></ul><p pid="800">&nbsp;</p><p pid="801"> To go further, the best might be to read the JSR 283 spec itself. API specifications are usually not one's favorite  bedtime reading, but this one is surprisingly readable. I would not read it linearly however, and suggest the  following reading order: </p><ul><li> The <em>Reading</em> chapter explains the various ways in which Nodes and properties can be accessed, using tree navigation.  </li><li> The <em>Query</em> chapter that follows explains how to query the JCR repository. Good content models allow you to go a long way without using queries, but they are obviously also needed at some point.  </li><li> The <em>Writing</em> chapter comes next in my opinion, as you'll obviously want to create some content! </li><li> I would then suggest studying at least the <em>Observation</em> chapter, as getting selective callbacks when content is created or modified is very powerful and might be a bit unusual. </li></ul><p pid="802">&nbsp;</p><p pid="803">  At this point, you would have most of the tools required to manage content, the rest of the spec's features are certainly useful but you might not need all of them. </p><p pid="804"> It took me a while to really grasp JCR and use it effectively in my content management activities, but I'm  not going back to the often messy world of hybrid <em>databases and files and message queues and a few  others things</em> content management architecture. I like what my colleague Lars Trieloff sometimes calls  the <em><a href="http://www.slideshare.net/lars3loff/the-zero-bullshit-architecture">Zero Bullshit Architecture</a></em>&nbsp; much better!  </p><h2>Author bio</h2><p pid="805"><a href="http://grep.codeconsult.ch">Bertrand Delacretaz</a> works as a senior developer in <a href="http://www.day.com">Day  Software's</a> R&amp;D group, using open source tools to create world-class content management systems. Bertrand is a member of the Apache software foundation, served on its Board of Directors from 2008 to 2009, and is involved in a number of Apache projects related to content management.</p><h2>References</h2><ul><li> [1]  <a href="http://jcp.org/en/jsr/detail?id=283">JSR 283 spec</a>, and the older  <a href="http://jcp.org/en/jsr/detail?id=170">JSR 170</a></li><li> [2] <a href="http://jackrabbit.apache.org">Apache Jackrabbit</a> - JCR reference implementation. </li><li>  [3] <a href="http://sling.apache.org">Apache Sling</a> - Web framework for JCR content repositories. </li><li> [4] <a href="http://sling.apache.org/site/discover-sling-in-15-minutes.html">Discover Sling in 15 minutes</a>, tutorial using Sling's HTTP API. </li><li> [5] <a href="http://www.slideshare.net/lars3loff/the-zero-bullshit-architecture">The Zero Bullshit Architecture</a>,  Slides by Lars Trieloff. </li><li> [6]  <a href="http://wiki.apache.org/jackrabbit/DavidsModel">David's Model</a> - a guide for blissful content modeling, by the JCR Spec Lead, David Nuescheler.  </li><li> [7] Slide from my <a href="http://www.slideshare.net/bdelacretaz/jcr-in-10-minutes-2408369">JCR in 10 minutes</a>  presentation. That slide was originally created by David Nuescheler. </li></ul></div>
+                  </div>
+
+                    <div id="bottom-bumper-container"></div>
+                    <div class="article-tag-pill-container">
+                        <span class="article-tag-pill">Repository (version control)</span>
+                        <span class="article-tag-pill">Property (programming)</span>
+                        <span class="article-tag-pill">Java (programming language)</span>
+                        <span class="article-tag-pill">Database</span>
+                        <span class="article-tag-pill">Content repository</span>
+                        <span class="article-tag-pill">API</span>
+                        <span class="article-tag-pill">Content management system</span>
+                    </div>
+
+                    <div class="attribution">
+                      <p>Opinions expressed by DZone contributors are their own.</p>
+                    </div>
+                      <div class="trending-separator goto"></div>
+                      <div class="trending goto">
+                        <h3>Related</h3>
+                        <ul>
+                            <li class="item">
+                              <div class="goto-link related-link" data-goto="/articles/how-to-build-web-service-using-spring-boot-2x">How To Build Web Service Using Spring Boot 2.x</div>
+                            </li>
+                            <li class="item">
+                              <div class="goto-link related-link" data-goto="/articles/new-orm-framework-for-kotlin">New ORM Framework for Kotlin</div>
+                            </li>
+                            <li class="item">
+                              <div class="goto-link related-link" data-goto="/articles/creating-scalable-openai-gpt-applications-in-java">Creating Scalable OpenAI GPT Applications in Java</div>
+                            </li>
+                            <li class="item">
+                              <div class="goto-link related-link" data-goto="/articles/keep-your-application-secrets-secret">Keep Your Application Secrets Secret</div>
+                            </li>
+                        </ul>
+                      </div>
+                </div>
+              </article>
+            </div>
+
+              <div id="above-pr-ad" class="bottom-ad-container">
+                <div id="div-gpt-ad-1435246566686-11" class="ads-bottom-leaderboard" data-gpt-slot="bottom"></div>
+              </div>
+              <div class="layout-card widget-top-border partner-resources-block" style="width:100%; margin-bottom: 1em;">
+                <div class="main-container">
+                  <div class="featured-header">
+                    <h2>
+                      <span>Partner Resources</span>
+                    </h2>
+                  </div>
+                  <div class="partner-resources-container">
+                    <div id="div-gpt-ad-1435246566686-5" class="resource-block" data-gpt-slot="partner" data-gpt-position="pr1"></div>
+                    <div id="div-gpt-ad-1435246566686-6" class="resource-block" data-gpt-slot="partner" data-gpt-position="pr2"></div>
+                    <div id="div-gpt-ad-1435246566686-7" class="resource-block" data-gpt-slot="partner" data-gpt-position="pr3"></div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div id="bsa-parent" class="bottom-sticky-ad-container hide">
+        <div id="div-gpt-ad-1635294790718-12" data-gpt-desktop="true" class="bottom-sticky-ad"></div>
+      </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modal-message" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header"></div>
+          <div class="modal-body"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<div class="comments-overlay"></div>
+<div id="comment-box">
+  <div class="comment-box-wrapper">
+    <div id="comment-input-editor"></div>
+  </div>
+  <div class="info hidden"></div>
+  <div class="comments-content">
+    <div class="comment-header">
+      <hr />
+      <span class="icon-comment">
+        <span class="numOfComments"></span> Comments
+      </span>
+    </div>
+    <div class="comments"></div>
+  </div>
+</div>
+
+<script async>const articleTitle = 'Java Content Repository: The Best Of Both Worlds'
+const articleUrl = 'https://dzone.com/articles/java-content-repository-best'
+
+const retweetLink = document.querySelector('#tweet-link')
+
+function retweet(event) {
+    event.preventDefault()
+    event.stopPropagation()
+
+    const twitter = 'https://twitter.com/intent/tweet'
+    const params = '?text=' + encodeURIComponent(articleTitle) + '&url=' + articleUrl + '&ref=dzone.com&via=DZoneInc'
+    const win = window.open(twitter + params, '_blank')
+    win.focus()
+}
+
+retweetLink.addEventListener('click', retweet);
+
+function showStatusMessage(options) {
+  var modal = document.getElementById("modal-message");
+
+  if(modal) {
+    modal.classList.add(options.type);
+    var modalBody = modal.querySelector(".modal-content .modal-body");
+    var modalHeader = modal.querySelector(".modal-content .modal-header");
+
+    modalHeader.innerText = options.header ? options.header : "";
+    modalBody.innerText = options.body ? options.body : "";
+
+    $(modal).modal("show");
+
+    $(modal).on('hidden.bs.modal', function () {
+      modal.classList.remove(options.type);
+    });
+  }
+}
+
+function showConfirmMessage(options) {
+  var modal = document.getElementById("modal-message");
+
+  if(modal) {
+    modal.classList.add(options.type);
+    var modalBody = modal.querySelector(".modal-content .modal-body");
+    var modalHeader = modal.querySelector(".modal-content .modal-header");
+
+    modalHeader.innerText = options.header ? options.header : "";
+    modalBody.innerText = options.body ? options.body : "";
+
+    if (options.textarea) {
+      const textareaDiv = document.createElement('div')
+      const textareaLabel = document.createElement('label')
+      textareaLabel.setAttribute('for', 'modal-textarea')
+      textareaLabel.innerText = options.textarea.label
+
+      const textarea = document.createElement('textarea')
+      textarea.id = 'modal-textarea'
+      textarea.placeholder = (options.textarea.placeholder || '')
+      textarea.setAttribute('rows', (options.textarea.rows || 3))
+      textarea.classList.add('form-control', 'not-resizable')
+
+      if (options.textarea.maxlength) {
+        textarea.maxLength = options.textarea.maxlength
+      }
+
+      textareaDiv.appendChild(textareaLabel)
+      textareaDiv.appendChild(textarea)
+      modalBody.appendChild(textareaDiv)
+    }
+
+    var btnContainer = document.createElement("div");
+    btnContainer.classList.add("btn-container");
+
+    var noBtn = document.createElement("button");
+    noBtn.innerText = options.noBtnText ? options.noBtnText : "No";
+    noBtn.classList.add("no-btn");
+
+    var yesBtn = document.createElement("button");
+    yesBtn.innerText = options.yesBtnText ? options.yesBtnText : "Yes";
+    yesBtn.classList.add("yes-btn");
+
+    btnContainer.appendChild(noBtn);
+    btnContainer.appendChild(yesBtn);
+
+    modalBody.appendChild(btnContainer);
+
+    $(modal).modal("show");
+
+    $(noBtn).one("click", function() {
+      $(modal).modal("hide");
+
+      if(options.noCallback) {
+        $(modal).one('hidden.bs.modal', function () {
+          options.noCallback();
+        });
+      }
+    });
+
+    $(yesBtn).one("click", function() {
+      $(modal).modal("hide");
+
+      if(options.yesCallback) {
+        $(modal).one('hidden.bs.modal', function () {
+          options.yesCallback();
+        });
+      }
+    });
+
+    $(modal).on('hidden.bs.modal', function () {
+      modal.classList.remove(options.type);
+    });
+  }
+}
+
+function getSuspensionBody() {
+  return 'We regret to inform you that your DZone account has been suspended for violating our Guidelines. ' +
+      'Please reach out to editors@dzone.com if you would like additional information.';
+}</script>
+
+<link rel="stylesheet" media="all" href="https://dz2cdn1.dzone.com/themes/dz20/ftl/footer/styles.css">
+
+<div id="ftl-footer">
+  <div class="container-fluid footerOuter">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="container">
+          <div class="row footer">
+            <div class="col-md-12 footerWidget">
+              <div class="row footerContainer footer">
+                <div class="left col-xs-12 col-sm-7">
+                  <div class="col-xs-12 social-media-icons footer-mobile">
+                    <ul class="icons-only">
+                      <li class="rss-icon" id="rss-footer-1">
+                        <a href="/pages/feeds" target="_blank" rel="noreferrer noopener">
+                          <i class="icon-rss-1"></i>
+                        </a>
+                      </li>
+                      <li class="twitter-icon">
+                        <a href="https://twitter.com/DZoneInc" target="_blank" rel="noreferrer noopener">
+                          <i class="icon-twitter"></i>
+                        </a>
+                      </li>
+                      <li class="facebook-icon">
+                        <a href="https://www.facebook.com/DZoneInc" target="_blank" rel="noreferrer noopener">
+                          <i class="icon-facebook-1"></i>
+                        </a>
+                      </li>
+                      <li class="linkedin-icon">
+                        <a href="https://www.linkedin.com/company/dzone/" target="_blank"
+                           rel="noreferrer noopener">
+                          <i class="icon-linkedin-1"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="top-section col-xs-12">
+                    <div class="col-xs-12 col-sm-6">
+                      <p class="section-header">ABOUT US</p>
+                      <ul class="link-group">
+                        <li><a href="/pages/about" rel="noreferrer noopener">About DZone</a></li>
+                        <li><a href="mailto:support@dzone.com" rel="noreferrer noopener">Send feedback</a></li>
+                        <li><a href="/pages/2023-community-research-report">Community research</a></li>
+                          <li><a href="/sitemap" rel="noreferrer noopener">Sitemap</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                      <p class="section-header">ADVERTISE</p>
+                      <ul class="link-group">
+                        <li><a href="https://advertise.dzone.com" target="_blank" rel="noreferrer noopener">Advertise with DZone</a></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="bottom-section col-xs-12">
+                    <div class="col-xs-12 col-sm-6">
+                      <p class="section-header">CONTRIBUTE ON DZONE</p>
+                      <ul class="bottom-top-list link-group">
+                        <li><a href="/articles/dzones-article-submission-guidelines">Article Submission Guidelines</a></li>
+                        <li><a href="/pages/contribute" rel="noreferrer noopener">Become a Contributor</a></li>
+                        <li><a href="/pages/core" rel="noreferrer noopener">Core Program</a></li>
+                        <li><a href="/writers-zone" rel="noreferrer noopener">Visit the Writers' Zone</a></li>
+                      </ul>
+
+                      <p class="section-header">LEGAL</p>
+                      <ul class="link-group">
+                        <li><a href="https://technologyadvice.com/terms-conditions/" target="_blank" rel="noreferrer noopener">Terms of Service</a></li>
+                        <li><a href="https://technologyadvice.com/privacy-policy/" target="_blank" rel="noreferrer noopener">Privacy Policy</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                      <p class="section-header">CONTACT US</p>
+                      <ul class="link-group">
+                        <li>3343 Perimeter Hill Drive</li>
+                        <li>Suite 100</li>
+                        <li>Nashville, TN 37211</li>
+                        <li><a href="mailto:support@dzone.com" rel="noreferrer noopener">support@dzone.com</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="right col-xs-12 col-sm-5">
+
+                  <p class="connect-text">Let's be friends:</p>
+                  <div class="col-xs-12 social-media-icons footer-wide">
+                    <ul class="icons-only">
+                      <li class="rss-icon" id="rss-footer-1">
+                        <a href="/pages/feeds" target="_blank" rel="noreferrer noopener">
+                          <i class="icon-rss-1"></i>
+                        </a>
+                      </li>
+                      <li class="twitter-icon">
+                        <a href="https://twitter.com/DZoneInc" target="_blank" rel="noreferrer noopener">
+                          <i class="icon-twitter"></i>
+                        </a>
+                      </li>
+                      <li class="facebook-icon">
+                        <a href="https://www.facebook.com/DZoneInc" target="_blank" rel="noreferrer noopener">
+                          <i class="icon-facebook-1"></i>
+                        </a>
+                      </li>
+                      <li class="linkedin-icon">
+                        <a href="https://www.linkedin.com/company/dzone/" target="_blank"
+                           rel="noreferrer noopener">
+                          <i class="icon-linkedin-1"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+
+  <script async>
+      (function(w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+          var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+          j.async = true;
+          j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+          f.parentNode.insertBefore(j,f);
+      })(window, document, 'script', 'dataLayer', 'GTM-K25QL22');
+  </script>
+
+  <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-410289-1', 'auto');
+      ga('require', 'linkid', 'linkid.js');
+      ga('require', 'GTM-TSD9TZP');
+      ga('set', 'siteSpeedSampleRate', 25);
+  </script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+  <script async>const analytics = {
+    'dimension1': 'Databases',
+    'dimension2': 'article/opinion',
+    'dimension3': '2010-01-04',
+    'dimension4': '0',
+    'dimension5': '',
+    'dimension7': 'repository, property, java, Database, Content repository, API, Content management system',
+    'dimension8': 'bdelacretaz',
+    'dimension9': 'undefined',
+    'dimension10': 'Day Software'
+};
+
+if (window.ga) {
+    Object.keys(analytics).forEach(function(key) {
+        window.ga('set', key, analytics[key]);
+    });
+
+    window.ga('send', 'pageview');
+}</script>
+
+  <script>
+      const articleId = 472792;
+      const likes = 5;
+      const assetDomain = 'https://dz2cdn1.dzone.com';
+      const codemirrorVars = {
+          modeURI: 'https://dz2cdn1.dzone.com/themes/dz20/lib/codemirror/mode/',
+          requiredScripts: [
+              'https://dz2cdn1.dzone.com/themes/dz20/lib/codemirror/lib/codemirror.js',
+              'https://dz2cdn1.dzone.com/themes/dz20/lib/codemirror/addon/mode/multiplex.js',
+              'https://dz2cdn1.dzone.com/themes/dz20/lib/codemirror/mode/meta.js'
+          ]
+      };
+
+      const gptTags = {
+          'zone': 'Databases',
+          'topicTag': 'repository,property,java,Database,Content repository,API,Content management system',
+          'company': '',
+          'siteSection': 'Zones',
+          'articleCategory': 'opinion',
+          'nodeID': '472792',
+          'authorID': '563137',
+          'publishYear': '2010',
+          'publishMonth': '01',
+          'jobRole': '',
+          'companySize': '',
+          'env': 'prod'
+      };
+
+      const minCommentChar = 10;
+
+        const ctaModel = null;
+  </script>
+
+  <script src="https://dz2cdn1.dzone.com/themes/dz20/lib/static/jquery/jquery.min.js"></script>
+  <script async src="https://dz2cdn1.dzone.com/themes/dz20/lib/static/bootstrap/bootstrap.min.js"></script>
+  <script async src="https://dz2cdn1.dzone.com/themes/dz20/ftl/article/ads.js" onload="loadCTAIntoPage()"></script>
+
+  <script>
+      (function (w,d,t) {
+          _ml = w._ml || {};
+          _ml.eid = '65559';
+          var s, cd, tag; s = d.getElementsByTagName(t)[0]; cd = new Date();
+          tag = d.createElement(t); tag.async = 1;
+          tag.src = 'https://ml314.com/tag.aspx?' + cd.getDate() + cd.getMonth();
+          s.parentNode.insertBefore(tag, s);
+      })(window,document,'script');
+  </script>
+
+  <script>
+      !function(e,t,c,n,o,a,m){e._bmb||(o=e._bmb=function(){o.x?o.x.apply(o,arguments):o.q.push(arguments)},o.q=[],a=t.createElement(c),a.async=true,a.src="https://vi.ml314.com/get?eid=65559&tk=v56Edzruvd7dE2f68VuNhft2O2fbnq2blg8566IFCW1MX43d&fp="+(e.localStorage&&e.localStorage.getItem(n)||""),m=t.getElementsByTagName(c)[0],m.parentNode.insertBefore(a,m))}(window,document,"script","_ccmaid");
+  </script>
+
+  <script>
+      function loadScript(src) {
+          return new Promise(function (resolve, reject) {
+              const s = document.createElement('script')
+              s.src = src
+              s.onload = resolve
+              s.onerror = reject
+              document.head.appendChild(s)
+          })
+      }
+
+      function loadStyle(href) {
+          const link = document.createElement('link')
+          link.rel = 'stylesheet'
+          link.href = href
+          document.head.appendChild(link)
+      }
+
+      function loadScriptsSync(deferred) {
+          var p = Promise.resolve()
+          for (var i = 0; i < deferred.length; i++) {
+              let script = deferred[i]
+              p = p.then(function() {
+                  return loadScript(script)
+              })
+          }
+          return p
+      }
+
+      function loadStyles() {
+          const deferred = [
+              'https://dz2cdn1.dzone.com/themes/dz20/lib/codemirror/lib/codemirror.css',
+              'https://dz2cdn1.dzone.com/themes/dz20/ftl/comments/styles.css',
+              'https://dz2cdn1.dzone.com/themes/dz20/lib/froala3/css/froala_editor.pkgd.min.css',
+              'https://dz2cdn1.dzone.com/themes/dz20/lib/froala3/css/themes/gray.min.css',
+              'https://dz2cdn1.dzone.com/themes/dz20/ftl/article/mini-profile.css'
+          ]
+
+          for (var i = 0; i < deferred.length; i++) {
+              loadStyle(deferred[i])
+          }
+      }
+
+      window.addEventListener('load', function(event) {
+          loadStyles()
+
+          loadScriptsSync([
+            'https://dz2cdn1.dzone.com/themes/dz20/lib/lazysizes.min.js',
+            'https://dz2cdn1.dzone.com/themes/dz20/ftl/article/codeblocks.js',
+            'https://dz2cdn1.dzone.com/themes/dz20/ftl/article/activity-bar.js',
+            'https://dz2cdn1.dzone.com/themes/dz20/lib/froala3/js/froala_editor.pkgd.min.js',
+            'https://dz2cdn1.dzone.com/themes/dz20/ftl/froala/content.js',
+            'https://dz2cdn1.dzone.com/themes/dz20/ftl/comments/content.js',
+            'https://dz2cdn1.dzone.com/themes/dz20/ftl/article/content.js'
+          ])
+      })
+  </script>
+</body>
+</html>

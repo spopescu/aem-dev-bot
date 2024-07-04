@@ -1,0 +1,691 @@
+<!DOCTYPE html><html lang="en">
+<head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+        <title>Apache Sling :: Sling Models</title>
+        <link rel="icon" href="/favicon.ico"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"/>
+        <link rel="stylesheet" href="/res/css/site.css"/>
+        <script src='https://www.apachecon.com/event-images/snippet.js'></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js'></script><script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        
+	<!-- Matomo Web Analytics -->
+	<script>
+	var _paq = window._paq = window._paq || [];
+	/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+	/* We explicitly disable cookie tracking to avoid privacy issues */
+	_paq.push(['disableCookies']); 
+	_paq.push(['trackPageView']);
+	_paq.push(['enableLinkTracking']);
+	(function() {
+	  var u="https://matomo.privacy.apache.org/";
+	  _paq.push(['setTrackerUrl', u+'matomo.php']);
+	  _paq.push(['setSiteId', '6']);
+	  var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+	  g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+	})();
+	</script>
+	<!-- End Matomo Code -->
+	<link href='/pagefind/pagefind-ui.css' rel='stylesheet'><script src='/pagefind/pagefind-ui.js' type='text/javascript'></script>
+	<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#searchbox" });
+    });
+	</script>
+	
+    </head>    <body>
+        <div class="section">
+            <div class="level is-marginless">
+<div class="logo">
+                    <a href="https://sling.apache.org">
+                        <img border="0" alt="Apache Sling" src="/res/logos/sling.svg"/>
+                    </a>
+                </div><div class="header">
+                    <a href="https://www.apache.org">
+                        <img border="0" alt="Apache" src="/res/logos/apache.png"/>
+                    </a>
+                </div>                
+            </div><section class="searchbox level is-marginless">
+                <div id="searchbox"></div>
+            </section><div class="columns is-gapless">
+                <div class="column is-narrow sidemenu">
+<div class="container">
+                        <nav class="menu">
+                            <ul class="menu-list box is-shadowless is-marginless">
+                                <li>
+                                    <p class="menu-label">
+                                        <strong>Documentation</strong>
+                                    </p><ul>
+                                        <li><a href="/documentation.html">Overview</a></li><li><a href="/documentation/getting-started.html">Getting Started</a></li><li><a href="/documentation/the-sling-engine.html">The Sling Engine</a></li><li><a href="/documentation/development.html">Development</a></li><li><a href="/documentation/bundles.html">Bundles</a></li><li><a href="/documentation/tutorials-how-tos.html">Tutorials &amp; How-Tos</a></li><li><a href="/components/">Maven Plugins</a></li><li><a href="/documentation/configuration.html">Configuration</a></li>
+                                    </ul>
+                                </li><li>
+                                    <p class="menu-label">
+                                        <strong>API Docs</strong>
+                                    </p><ul>
+                                        <li><a href="/apidocs/sling12/index.html">Sling 12</a></li><li><a href="/apidocs/sling11/index.html">Sling 11</a></li><li><a href="/apidocs/sling10/index.html">Sling 10</a></li><li><a href="/apidocs/sling9/index.html">Sling 9</a></li><li><a href="/documentation/apidocs.html">All versions</a></li>
+                                    </ul>
+                                </li><li>
+                                    <p class="menu-label">
+                                        <strong>Support</strong>
+                                    </p><ul>
+                                        <li><a href="https://s.apache.org/sling.wiki">Wiki</a></li><li><a href="https://s.apache.org/sling.faq">FAQ</a></li><li><a href="/sitemap.html">Sitemap</a></li>
+                                    </ul>
+                                </li><li>
+                                    <p class="menu-label">
+                                        <strong>Project Info</strong>
+                                    </p><ul>
+                                        <li><a href="/downloads.cgi">Downloads</a></li><li><a href="https://www.apache.org/licenses/">License</a></li><li><a href="/news.html">News</a></li><li><a href="/releases.html">Releases</a></li><li><a href="https://issues.apache.org/jira/browse/SLING">Issue Tracker</a></li><li><a href="/links.html">Links</a></li><li><a href="/contributing.html">Contributing</a></li><li><a href="/project-information.html">Project Information</a></li><li><a href="/project-information/security.html">Security</a></li>
+                                    </ul>
+                                </li><li>
+                                    <p class="menu-label">
+                                        <strong>Source</strong>
+                                    </p><ul>
+                                        <li><a href="/repolist.html">Repositories</a></li><li><a href="https://gitbox.apache.org/repos/asf?s=sling">Git at Apache</a></li>
+                                    </ul>
+                                </li><li>
+                                    <p class="menu-label">
+                                        <strong>Apache Software<br>Foundation</strong>
+                                    </p><ul>
+                                        <li><a href="https://www.apache.org/foundation/thanks.html">Thanks!</a></li><li><a href="https://www.apache.org/foundation/sponsorship.html">Become a Sponsor</a></li><li><a href="https://www.apache.org/foundation/buy_stuff.html">Buy Stuff</a></li>
+                                    </ul>
+                                </li><li>
+                                    <a class="acevent" data-format="square" data-event="random"></a>
+                                </li><li>
+                                    <a href="https://apache.org/foundation/contributing.html" class="column">
+                                        <img border="0" alt="Support the Apache Software Foundation!" src="/res/images/SupportApache-small.png" width="125"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>                    
+                </div><div class="column main">
+                    <div class="box is-shadowless is-marginless">
+                        <div class="level">
+                            <div class="pagenav">
+<div class="breadcrumb">
+                                    <ul>
+                                        <li>
+                                            <a href="/">
+                                                Home
+                                            </a>
+                                        </li><li>
+                                            <a href="/documentation.html">
+                                                Documentation
+                                            </a>
+                                        </li><li>
+                                            <a href="/documentation/bundles.html">
+                                                Bundles
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>                                
+                            </div><div class="tags">
+                                <span class="tag">
+                                    <a href="/tags/models.html">
+                                        models
+                                    </a>
+                                </span>
+                            </div>
+                        </div><h1 class="title">
+                            Sling Models
+                        </h1><nav class="menu">
+                            <ul class="menu-list box is-shadowless is-paddingless">
+                                <li id="generatedToC">
+                                    <p class="menu-label">
+                                        <strong>Table of Contents</strong>
+                                    </p>
+                                </li>
+                            </ul>
+                        </nav><script src='/res/jquery-3.2.1.min.js' type='text/javascript'></script><script src='/res/tocjs-1-1-2.js' type='text/javascript'></script><script type='text/javascript'>$(document).ready(function() { $('#generatedToC').toc({'selector':'h1[class!=title],h2,h3','ulClass':'menu-list'}); } );</script><div class="content is-marginless">
+<div class="row" data-pagefind-body="true"><div><section><p><!-- TODO reactivate TOC once JBake moves to flexmark-java -->
+</p>
+<p>Many Sling projects want to be able to create model objects - POJOs which are automatically mapped from Sling objects, typically resources, but also request objects. Sometimes these POJOs need OSGi services as well. Sling Models provide an easy way to achieve this, integrating into the already existing pattern and infrastructure provided by Sling.</p>
+<h1><a href="#basic-usage" id="basic-usage">Basic Usage</a></h1>
+<h2><a href="#model-classes" id="model-classes">Model Classes</a></h2>
+<p>In the simplest case, the model class is annotated with <code>@Model</code> and the adaptable class.</p>
+<h3><a href="#field-injection" id="field-injection">Field Injection</a></h3>
+<p>Fields which need to be injected are annotated with <code>@ValueMapValue</code>:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
+
+@Model(adaptables=Resource.class)
+public class MyModel {
+
+    @ValueMapValue
+    private String propertyName;
+}
+</code></pre>
+<p>In this case, a property named <code>propertyName</code> will be looked up from the Resource (after first adapting it to a <code>ValueMap</code>) and it is injected. Fields can use any visibility modifier:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=Resource.class)
+public class PublicFieldModel {
+
+    @ValueMapValue
+    public String publicField;
+}
+
+@Model(adaptables=Resource.class)
+public class ProtectedFieldModel {
+
+    @ValueMapValue
+    protected String protectedField;
+}
+
+@Model(adaptables=Resource.class)
+public class PrivateFieldModel {
+
+    @ValueMapValue
+    private String privateField;
+}
+
+@Model(adaptables=Resource.class)
+public class PackagePrivateFieldModel {
+
+    @ValueMapValue
+    String packagePrivateField;
+}
+</code></pre>
+<h3><a href="#method-injection-on-interface-only-models" id="method-injection-on-interface-only-models">Method Injection (on interface only models)</a></h3>
+<p>For an interface, it is similar:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=Resource.class)
+public interface MyModel {
+ 
+    @ValueMapValue
+    String getPropertyName();
+}
+</code></pre>
+<p>Interface methods must be <code>public</code>. Even though private interface methods have been available since Java 9, Sling Models uses Dynamic Proxies to instantiate the interfaces, which does not work with private interface methods. Additionally, while default interface methods will work with interface injection, the default implementation (in the interface) is currently not used, and will not be executed.</p>
+<h3><a href="#constructor-injection" id="constructor-injection">Constructor Injection</a></h3>
+<p>Constructor injection is also supported (as of <a href="https://issues.apache.org/jira/browse/SLING-3716">Sling Models 1.1.0</a>):</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=Resource.class)
+public class MyModel {    
+    @Inject
+    public MyModel(@ValueMapValue(name=&quot;propertyName&quot;) String propertyName) {
+      // constructor code
+    }
+}
+</code></pre>
+<p>Because the name of a constructor argument parameter cannot be detected via the Java Reflection API a <code>@Named</code> annotation (or a <code>name</code> element on injector specific annotations) is mandatory for injectors that require a name for resolving the injection. In order for a constructor to be used for injection <em>it has to be annotated on method level with <code>@Inject</code></em>. In addition using injector-specific annotations on parameter level is supported.</p>
+<p>Constructors may use any visibility modifier (as of <a href="https://issues.apache.org/jira/browse/SLING-8069">Sling Models 1.5.0</a>).</p>
+<h2><a href="#model-and-adaptable-types" id="model-and-adaptable-types">@Model and Adaptable Types</a></h2>
+<p>When defining a Sling Model class, the <code>adaptables</code> parameter to the <code>@Model</code> annotation is mostly determined by the injectors being used. The provided class must satisfy the needs of all injectors (for the details see <a href="#available-injectors-1">the table below</a>). For example if the model class only uses the <code>ValueMap</code> injector, the adaptables parameter can be a <code>Resource</code>, a <code>SlingHttpServletRequest</code> or both. But if the <code>Request Attribute</code> injector is used, only an adaptable of the type <code>SlingHttpServletRequest</code> will work.</p>
+<p>In order to increase the reuse it's advised to stick to <code>Resource</code> as adaptables if possible, as such a model can be used in the context of request and outside of it.</p>
+<h2><a href="#bundle-manifest-configuration" id="bundle-manifest-configuration">Bundle Manifest Configuration</a></h2>
+<p>In order for these classes to be picked up, there is a header which must be added to the bundle's manifest:</p>
+<pre><code>&lt;Sling-Model-Packages&gt;
+  org.apache.sling.models.it.models
+&lt;/Sling-Model-Packages&gt;
+</code></pre>
+<p>This header must contain all packages which contain model classes or interfaces. However, subpackages need not be listed individually, e.g. the header above will also pick up model classes in <code>org.apache.sling.models.it.models.sub</code>. However, wildcard characters like <code>*</code> are not supported. Multiple packages can be listed in a comma-separated list (any whitespace will be removed):</p>
+<pre><code>&lt;Sling-Model-Packages&gt;
+  org.apache.sling.models.it.models,
+  org.apache.sling.other.models
+&lt;/Sling-Model-Packages&gt;
+</code></pre>
+<p>Alternatively it is possible to list all classes individually that are Sling Models classes via the <code>Sling-Model-Classes</code> header. Again, wildcard characters like <code>*</code> are not supported.</p>
+<p>If you use the Sling Models bnd plugin all required bundle headers are generated automatically at build time, see chapter <a href="#registration-of-sling-models-classes-via-bnd-plugin-1">Registration of Sling Models classes via bnd plugin</a> below.</p>
+<h1><a href="#client-code" id="client-code">Client Code</a></h1>
+<p>There are multiple ways to instantiate Sling Models.</p>
+<h2><a href="#adaptto" id="adaptto">adaptTo()</a></h2>
+<p>Client code doesn't need to be aware that Sling Models is being used. It just uses the Sling Adapter framework:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->MyModel model = resource.adaptTo(MyModel.class)
+</code></pre>
+<p>Or</p>
+<pre><code><!-- TODO syntax marker (::jsp) disabled -->&lt;sling:adaptTo adaptable=&quot;${resource}&quot; adaptTo=&quot;org.apache.sling.models.it.models.MyModel&quot; var=&quot;model&quot;/&gt;
+</code></pre>
+<p>Or</p>
+<pre><code><!-- TODO syntax marker (::jsp) disabled -->${sling:adaptTo(resource, 'org.apache.sling.models.it.models.MyModel')}
+</code></pre>
+<p>As with other AdapterFactories, if the adaptation can't be made for any reason, <code>adaptTo()</code> returns null.</p>
+<h2><a href="#modelfactory" id="modelfactory">ModelFactory</a></h2>
+<p><em>See also  <a href="https://issues.apache.org/jira/browse/SLING-3709">SLING-3709</a></em></p>
+<p>Since Sling Models 1.2.0 there is another way of instantiating models. The OSGi service <code>ModelFactory</code> provides a method for instantiating a model that throws exceptions. This is not allowed by the Javadoc contract of the <code>adaptTo()</code> method. That way <code>null</code> checks are not necessary and it is easier to see why instantiation of the model failed.</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->try {
+    MyModel model = modelFactory.createModel(object, MyModel.class);
+} catch (Exception e) {
+    // give out error message that the model could not be instantiated. 
+    // The exception contains further information. 
+    // See the javadoc of the ModelFactory for which Exception can be expected here
+}
+</code></pre>
+<p>In addition <code>ModelFactory</code> provides methods for checking whether a given class is a model at all (having the model annotation) or whether a class can be adapted from a given adaptable.</p>
+<h2><a href="#usage-in-htl" id="usage-in-htl">Usage in HTL</a></h2>
+<p>Please see <a href="/documentation/bundles/scripting/scripting-htl.html#java-use-provider-1">Sling Models Use Provider</a>; internally it uses the <code>ModelFactory</code> from above.</p>
+<h1><a href="#available-injectors" id="available-injectors">Available injectors</a></h1>
+<p>In the above cases just the <code>@ValueMapValue</code> annotation was used, but there other available injectors. For each injector there is a specialized annotation available. For the optional parameters see the next section.</p>
+<table>
+<thead>
+<tr><th>Title </th><th> Injector Name  </th><th> Annotation          </th><th> Supported Optional Elements    </th><th> Description   </th><th> Applicable to (including  using <code>@Via</code>) </th><th> Array Support   </th><th> Parametrized Type Support</th></tr>
+</thead>
+<tbody>
+<tr><td>Scripting Bindings</td><td><code>script-bindings</code> </td><td> <code>@ScriptVariable</code>   </td><td> <code>injectionStrategy</code> and <code>name</code>          </td><td> Injects the script variable defined via <a href="https://cwiki.apache.org/confluence/display/SLING/Scripting+variables">Sling Bindings</a>. It requires the the adaptable is a <code>SlingHttpServletRequest</code>. If <code>name</code> is not set the name is derived from the method/field name.  </td><td> A ServletRequest object which has the <code>Sling Bindings</code> attribute defined </td><td> no conversion is done </td><td>  If a parameterized type is passed, the bindings value must be of a compatible type of the parameterized type.</td></tr>
+<tr><td>ValueMap </td><td> <code>valuemap</code> </td><td> <code>@ValueMapValue</code>    </td><td> <code>injectionStrategy</code>, <code>name</code>   </td><td> Injects a <code>ValueMap</code> value taken from the adapted resource (either taking from the adapted resource or the resource of the adapted SlingHttpServletRequest). If <code>name</code> is not set the name is derived from the method/field name. </td><td>Any object which is or can be adapted to a <code>ValueMap</code> </td><td>  Primitive arrays wrapped/unwrapped as necessary. Wrapper object arrays are unwrapped/wrapped as necessary. </td><td> Parameterized <code>List</code> and <code>Collection</code> injection points are injected by getting an array of the component type and creating an unmodifiable <code>List</code> from the array.</td></tr>
+<tr><td>Child Resource </td><td> <code>child-resources</code> </td><td> <code>@ChildResource</code>    </td><td> <code>injectionStrategy</code>, <code>name</code>   </td><td> Injects a child resource by name (taken from the adapted resource (either taking from the adapted resource or the resource of the adapted SlingHttpServletRequest). If <code>name</code> is not set the name is derived from the method/field name. </td><td> <code>Resource</code> objects  </td><td>  none  </td><td> if a parameterized type <code>List</code> or <code>Collection</code> is passed, a <code>List&lt;Resource&gt;</code> is returned (the contents of which may be adapted to the target type) filled with all child resources of the resource looked up by the given name.</td></tr>
+<tr><td>Request Attribute </td><td> <code>request-attributes</code> </td><td> <code>@RequestAttribute</code> </td><td> <code>injectionStrategy</code>, <code>name</code>    </td><td> Injects a request attribute by name, it requires the the adaptable is a <code>SlingHttpServletRequest</code> . If <code>name</code> is not set the name is derived from the method/field name. </td><td> <code>ServletRequest</code> objects </td><td> no conversion is done </td><td> If a parameterized type is passed, the request attribute must be of a compatible type of the parameterized type.</td></tr>
+<tr><td>Resource path </td><td> <code>resource-path</code> </td><td> <code>@ResourcePath</code>     </td><td> <code>injectionStrategy</code>, <code>path</code>, and <code>name</code> </td><td>Injects a resource either by path or by reading a property with the given name. </td><td> <code>Resource</code> or <code>SlingHttpServletRequest</code> objects </td><td> yes </td><td> none</td></tr>
+<tr><td>OSGi service </td><td> <code>osgi-services</code> </td><td> <code>@OSGiService</code>      </td><td> <code>injectionStrategy</code>, <code>filter</code>           </td><td> Injects an OSGi service by type (and the optional filter) </td><td> Any object </td><td> yes </td><td> Parameterized <code>List</code> and <code>Collection</code> injection points are injected by getting an array of the services and creating an unmodifiable <code>List</code> from the array.</td></tr>
+<tr><td>Context-Aware Configuration </td><td> <code>ca-config</code> </td><td> <code>@ContextAwareConfiguration</code> </td><td> <code>injectionStrategy</code>, <code>name</code>    </td><td>  Lookup context-aware configuration. See <a href="#context-aware-configuration">Context-Aware Configuration</a> below. </td><td> Any object </td><td> yes </td><td> If a parameterized type <code>List</code> or <code>Collection</code> is used, a configuration collection is looked up.</td></tr>
+<tr><td>Self </td><td> <code>self</code> </td><td> <code>@Self</code>             </td><td> <code>injectionStrategy</code>                     </td><td>  Injects the adaptable itself. If the field type does not match with the adaptable it is tried to adapt the adaptable to the requested type. </td><td> any object </td><td> none </td><td> none</td></tr>
+<tr><td>Sling Object </td><td> <code>sling-object</code> </td><td> <code>@SlingObject</code>      </td><td> <code>injectionStrategy</code>                     </td><td> Injects commonly used sling objects if the field matches with the class: request, response, resource resolver, current resource, SlingScriptHelper </td><td> <code>Resource</code>, <code>ResourceResolver</code> or <code>SlingHttpServletRequest</code> objects (not all objects can be resolved by all adaptables).  </td><td> none </td><td> none</td></tr>
+</tbody>
+</table>
+<h1><a href="#parameters-to-the-injectors" id="parameters-to-the-injectors">Parameters to the Injectors</a></h1>
+<p>Injectors can support optional parameters as listed in the above table</p>
+<h2><a href="#optional-and-required" id="optional-and-required">Optional and Required</a></h2>
+<p>Injected fields/methods are assumed to be required. To mark them as optional, there are 2 options:</p>
+<ul>
+<li>add the parameter <code>injectionStrategy=InjectionStrategy.OPTIONAL</code> to the annotation</li>
+<li>or wrap the type into an <code>Optional</code></li>
+</ul>
+<p>It is recommended to use the approach using the <code>Optional</code> type, because then this &quot;optionality&quot; is also expressed in the type system.</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->import java.util.Optional;
+
+@Model(adaptables=Resource.class)
+public class MyModel {
+
+    @ValueMapValue(injectionStrategy=InjectionStrategy.OPTIONAL)
+    private String optionalProperty;
+
+    @ValueMapValue
+    private Optional&lt;String&gt; anotherOptionalProperty;
+}
+</code></pre>
+<p>Please note, that even injections marked as optional are always tried. It is just that any failure to inject a value does not lead to the termination of the creation of the SlingModel, but instead it continues, leaving the field value/return value at the default value (as provided by the <code>@Default</code> annotation) or at the default value of the used type.</p>
+<p>If a majority of injected fields/methods are optional, it is possible (since Sling Models API 1.0.2/Impl 1.0.6) to change the default injection strategy by using adding <code>defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL</code> to the <code>@Model</code> annotation:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=Resource.class, defaultInjectionStrategy=DefaultInjectionStrategy.OPTIONAL)
+public class MyModel {
+
+    @ValueMapValue
+    private String optionalProperty;
+}
+</code></pre>
+<p>To still mark some fields/methods as being mandatory while relying on <code>defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL</code> for all other fields, the parameter <code>injectionStrategy=InjectionStrategy.REQUIRED</code> can be used.</p>
+<p><code>defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL</code> parameters are only evaluated when using the <code>defaultInjectionStrategy = DefaultInjectionStrategy.REQUIRED</code> (which is the default), <code>injectionStrategy=InjectionStrategy.REQUIRED</code> parameters only if using <code>defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL</code>.</p>
+<h2><a href="#names" id="names">Names</a></h2>
+<p>If the field or method name doesn't exactly match the property name, the parameter <code>name</code> can be used:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=Resource.class)
+public class MyModel {
+ 
+    @ValueMapValue(name=&quot;secondPropertyName&quot;)
+    private String otherName;
+} 
+</code></pre>
+<p>In this case the value of the property named <code>secondPropertyName</code> would be taken from the ValueMap.</p>
+<h2><a href="#path" id="path">Path</a></h2>
+<p>The <code>@ResourcePath</code> injector supports the parameter <code>path</code> to inject a resource with the given parameter:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=Resource.class) {
+
+    @ResourcePath(path=&quot;/libs&quot;)
+    Resource libs;
+}
+</code></pre>
+<h2><a href="#osgi-service-filters" id="osgi-service-filters">OSGi Service Filters</a></h2>
+<p>OSGi injection can be filtered:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=SlingHttpServletRequest.class)
+public class MyModel {
+ 
+    @OSGiService
+    private PrintWriter out;
+ 
+    @OSGiInjector(name=&quot;log&quot;)
+    private Logger logger;
+ 
+    @OsgiInjector(filter=&quot;paths=/bin/something&quot;)
+    private List&lt;Servlet&gt; servlets;
+}
+</code></pre>
+<h2><a href="#collection-support" id="collection-support">Collection support</a></h2>
+<p>Lists and arrays are supported by some injectors. For the details look at the table given in <a href="#available-injectors-1">Available Injectors</a>:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=Resource.class)
+public class MyModel {
+ 
+    @OsgiService
+    private List&lt;Servlet&gt; servlets;
+}
+</code></pre>
+<p>List injection for <em>child resources</em> works by injecting grand child resources (since Sling Models Impl 1.0.6). For example, the class</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=Resource.class)
+public class MyModel {
+
+    @ChildResource
+    private List&lt;Resource&gt; addresses;
+}
+</code></pre>
+<p>Is suitable for a resource structure such as:</p>
+<pre><code>+- resource (being adapted)
+ |
+ +- addresses
+    |
+    +- address1
+    |
+    +- address2
+</code></pre>
+<p>In this case, the <code>addresses</code> <code>List</code> will contain <code>address1</code> and <code>address2</code>.</p>
+<h1><a href="#defaults" id="defaults">Defaults</a></h1>
+<p>A default value can provided (for String and primitives)</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=Resource.class)
+public class MyModel {
+
+    @ValueMapValue
+    @Default(values=&quot;defaultValue&quot;)
+    private String name;
+}
+</code></pre>
+<p>Defaults can also be arrays:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=Resource.class)
+public class MyModel {
+
+    @ValueMapValue
+    @Default(intValues={1,2,3,4})
+    private int[] integers;
+}
+</code></pre>
+<h1><a href="#via" id="via">Via</a></h1>
+<p>In some cases, a different object should be used as the adaptable instead of the original adaptable. This can be done using the <code>via</code> parameter.</p>
+<p>While this feature does also work with the injector-specfic annotations above, it's use is discouraged because it's barely used and just increases the complexity of the models.</p>
+<p>By default, this can be done using a JavaBean property of the adaptable:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=SlingHttpServletRequest.class)
+public interface MyModel {
+ 
+    // will return request.getResource().getValueMap().get(&quot;propertyName&quot;, String.class)
+    @Inject(via=&quot;resource&quot;)
+    String getPropertyName();
+} 
+</code></pre>
+<p>A different strategy can be used to define the adaptable by specifying a <code>type</code> attribute:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=Resource.class)
+public interface MyModel {
+
+	// will return resource.getChild(&quot;jcr:content&quot;).getValueMap().get(&quot;propertyName&quot;, String.class)
+    @Inject @Via(value = &quot;jcr:content&quot;, type = ChildResource.class)
+    String getPropertyName();
+
+}
+</code></pre>
+<h2><a href="#via-types" id="via-types">Via Types</a></h2>
+<p>The following standard types are provided (all types are in the package <code>org.apache.sling.models.annotations.via</code>, available since API 1.3.4, Implementation 1.4.0)</p>
+<table>
+<thead>
+<tr><th><code>@Via</code> type value             </th><th> Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>BeanProperty</code>  (default)     </td><td> Uses a JavaBean property from the adaptable.</td></tr>
+<tr><td><code>ChildResource</code>               </td><td> Uses a child resource from the adaptable, assuming the adaptable is a <code>Resource</code>. In case the adaptable is a <code>SlingHttpServletRequest</code> uses a wrapper overwriting the <code>getResource()</code> to point to the given child resource (<a href="https://issues.apache.org/jira/browse/SLING-7321">SLING-7321</a>).</td></tr>
+<tr><td><code>ForcedResourceType</code>          </td><td> Creates a wrapped resource with the provided resource type. If the adaptable is a <code>SlingHttpServletRequest</code>, a wrapped request is created as well to contain the wrapped resource.</td></tr>
+<tr><td><code>ResourceSuperType</code>           </td><td> Creates a wrapped resource with the resource type set to the adaptable's resource super type. If the adaptable is a <code>SlingHttpServletRequest</code>, a wrapped request is created as well to contain the wrapped resource.</td></tr>
+</tbody>
+</table>
+<p>Defining your own type for the <code>@Via</code> annotation is a two step process. The first step is to create a marker class implementing the <code>@ViaProviderType</code> annotation. This class can be entirely empty, e.g.</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->public class MyCustomProviderType implements ViaProviderType {}
+</code></pre>
+<p>The second step is to create an OSGi service implementing the <code>ViaProvider</code> interface. This interface defines two methods:</p>
+<ul>
+<li><code>getType()</code> should return the marker class.</li>
+<li><code>getAdaptable()</code> should return the new adaptable or <code>ViaProvider.ORIGINAL</code> to indicate that the original adaptable should be used.</li>
+</ul>
+<h1><a href="#postconstruct-methods" id="postconstruct-methods">PostConstruct Methods</a></h1>
+<p>The <code>@PostConstruct</code> annotation can be used to add methods which are invoked upon completion of all injections:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=SlingHttpServletRequest.class)
+public class MyModel {
+ 
+    @SlingObject
+    private PrintWriter out;
+ 
+    @OsgiInjector(name=&quot;log&quot;)
+    private Logger logger;
+ 
+    @PostConstruct
+    protected void sayHello() {
+         logger.info(&quot;hello&quot;);
+    }
+}
+</code></pre>
+<p><code>@PostConstruct</code> methods in a super class will be invoked first. If a <code>@PostConstruct</code> method exists in a subclass with the same name as in the parent class, only the subclass method will be invoked. This is the case regardless of the scope of either method.</p>
+<p>Since Sling Models Implementation 1.4.6, <code>@PostConstruct</code> methods may return a <code>false</code> boolean value in which case the model creation will fail without logging any exception (a message will be logged at the <code>DEBUG</code> level).</p>
+<h1><a href="#adaptations-and-nesting-sling-models" id="adaptations-and-nesting-sling-models">Adaptations and nesting Sling Models</a></h1>
+<p>If the injected object does not match the desired type and the object implements the <code>Adaptable</code> interface, Sling Models will try to adapt it. This provides the ability to create rich object graphs. For example:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=Resource.class)
+public interface MyModel {
+ 
+    @ChildResource
+    ImageModel getImage();
+}
+
+<!-- TODO syntax marker (::java) disabled -->@Model(adaptables=Resource.class)
+public interface ImageModel {
+ 
+    @ValueMapvalue
+    String getPath();
+}
+</code></pre>
+<p>When a resource is adapted to <code>MyModel</code>, a child resource named <code>image</code> is automatically adapted to an instance of <code>ImageModel</code>.</p>
+<p>Constructor injection is supported for the adaptable itself. For example:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables=Resource.class)
+public class MyModel {
+
+    public MyModel(Resource resource) {
+        this.resource = resource;
+    }
+
+    private final Resource resource;
+
+    @ValueMapValue
+    private String propertyName;
+}
+</code></pre>
+<p>Note: storing the original adaptable (request/resource) in a field is discouraged. Please see the note about <a href="#caching-self-reference-note">caching and self references</a> below.</p>
+<h1><a href="#sling-validation" id="sling-validation">Sling Validation</a></h1>
+<p><a name="validation" /> <em>See also <a href="https://issues.apache.org/jira/browse/SLING-4161">SLING-4161</a></em></p>
+<p>Since API version 1.2.0 you can use the attribute <code>validation</code> on the Model annotation to call a validation service on the resource being used by the Sling model. That attribute supports three different values:</p>
+<table>
+<thead>
+<tr><th>Value </th><th>  Description </th><th>  Invalid validation model </th><th>  No validation model found </th><th>  Resource invalid according to validation model</th></tr>
+</thead>
+<tbody>
+<tr><td><code>DISABLED</code> (default) </td><td> don't validate the resource bound to the Model </td><td> Model instantiated </td><td> Model instantiated  </td><td> Model instantiated</td></tr>
+<tr><td><code>REQUIRED</code> </td><td> enforce validation of the resource bound to the Model </td><td> Model not instantiated </td><td> Model not instantiated </td><td> Model not instantiated</td></tr>
+<tr><td><code>OPTIONAL</code> </td><td> validate the resource bound to the Model (if a validation model is found) </td><td> Model not instantiated </td><td> Model instantiated </td><td> Model not instantiated</td></tr>
+</tbody>
+</table>
+<p>In case the model is not instantiated an appropriate error message is logged (if <code>adaptTo()</code> is used) or an appropriate exception is thrown if <code>ModelFactory.createModel()</code> is used.</p>
+<p>The only implementation for this Sling Models validation service is leveraging <a href="/documentation/bundles/validation.html">Sling Validation</a> and is located in the bundle <a href="https://github.com/apache/sling-org-apache-sling-models-validation-impl">org.apache.sling.models.validation-impl</a>. Validation is only working on models which are adapted from either <code>Resource</code> or <code>SlingHttpServletRequest</code> and if the Sling Validation Bundle is deployed.</p>
+<h1><a href="#performance" id="performance">Performance</a></h1>
+<h2><a href="#caching-adaptions" id="caching-adaptions">Caching adaptions</a></h2>
+<p>By default, Sling Models do not do any caching of the adaptation result and every request for a model class will result in a new instance of the model class. However, there are two notable cases when the adaptation result can be cached. The first case is when the adaptable extends the <code>SlingAdaptable</code> base class. Most significantly, this is the case for many <code>Resource</code> adaptables as <code>AbstractResource</code> extends <code>SlingAdaptable</code>.  <code>SlingAdaptable</code> implements a caching mechanism such that multiple invocations of <code>adaptTo()</code> will return the same object. For example:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->// assume that resource is an instance of some subclass of AbstractResource
+ModelClass object1 = resource.adaptTo(ModelClass.class); // creates new instance of ModelClass
+ModelClass object2 = resource.adaptTo(ModelClass.class); // SlingAdaptable returns the cached instance
+assert object1 == object2;
+</code></pre>
+<p>While this is true for <code>AbstractResource</code> subclasses, it is notably <strong>not</strong> the case for <code>SlingHttpServletRequest</code> as this class does not extend <code>SlingAdaptable</code>. So:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->// assume that request is some SlingHttpServletRequest object
+ModelClass object1 = request.adaptTo(ModelClass.class); // creates new instance of ModelClass
+ModelClass object2 = request.adaptTo(ModelClass.class); // creates another new instance of ModelClass
+assert object1 != object2;
+</code></pre>
+<p>Since API version 1.3.4, Sling Models <em>can</em> cache an adaptation result, regardless of the adaptable by specifying <code>cache = true</code> on the <code>@Model</code> annotation.</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptable = SlingHttpServletRequest.class, cache = true)
+public class ModelClass {}
+
+...
+
+// assume that request is some SlingHttpServletRequest object
+ModelClass object1 = request.adaptTo(ModelClass.class); // creates new instance of ModelClass
+ModelClass object2 = request.adaptTo(ModelClass.class); // Sling Models returns the cached instance
+assert object1 == object2;
+</code></pre>
+<p>When <code>cache = true</code> is specified, the adaptation result is cached regardless of how the adaptation is done:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptable = SlingHttpServletRequest.class, cache = true)
+public class ModelClass {}
+
+...
+
+// assume that request is some SlingHttpServletRequest object
+ModelClass object1 = request.adaptTo(ModelClass.class); // creates new instance of ModelClass
+ModelClass object2 = modelFactory.createModel(request, ModelClass.class); // Sling Models returns the cached instance
+assert object1 == object2;
+</code></pre>
+<p><a name="caching-self-reference-note"></a></p>
+<h2><a href="#a-note-about-cache-true-and-using-the-self-injector" id="a-note-about-cache-true-and-using-the-self-injector">A note about cache = true and using the self injector</a></h2>
+<p>In general, it is <strong>strongly</strong> discouraged to store a reference to the original adaptable using the <code>self</code> injector. Using implementation version 1.4.8 or below, storing the original adaptable in a Sling Model, can cause heap space exhaustion, crashing the JVM. Starting in version 1.4.10, storing the original adaptable will not crash the JVM, but it can cause unexpected behavior (e.g. a model being created twice, when it should be cached). The issue was first reported in <a href="https://issues.apache.org/jira/browse/SLING-7586">SLING-7586</a>.</p>
+<p>The problem can be avoided by discarding the original adaptable when it is no longer needed. This can be done by setting affected field(s) to <code>null</code> at the end of the <code>@PostConstruct</code> annotated method:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptable = SlingHttpServletRequest.class, cache = true)
+public class CachableModelClass {
+    @Self
+    private SlingHttpServletRequest request;
+    
+    @PostConstruct
+    private void init() {
+      ... do something with request ...
+      
+      this.request = null;
+    }
+}
+</code></pre>
+<p>Alternatively, the same effect can be achieved using constructor injection, by not storing the reference to the adaptable:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptable = SlingHttpServletRequest.class, cache = true)
+public class CachableModelClass {
+    public CachableModelClass(SlingHttpServletRequest request) {
+      ... do something with request ...
+    }
+}
+</code></pre>
+<h2><a href="#other-performance-aspects" id="other-performance-aspects">Other performance aspects</a></h2>
+<p>Given the ease of creating Sling Models and their features, performance can get a problem; the following aspects should be considered:</p>
+<ul>
+<li>When a Sling Model is created, all injections are at least tried, and depending on the injector the performance impact might vary. So model classes with many injections are always slower than smaller models with less injections. In such situations it can make sense to have specialized Sling Models which just cover a single aspect needed in a special situation.</li>
+<li>The support of adaptions can lead to situations, that the instantiation of a single Sling Model can lead to the creation of a whole graph of Sling Models (<a href="#adaptations-and-nesting-sling-models-1">see above</a>); this is not always required and can lead to severe performance problems. Also in this situations the use of more specialized Sling Models can help which do not always trigger the instantation of this graph.</li>
+</ul>
+<h1><a href="#context-aware-configuration" id="context-aware-configuration">Context-Aware Configuration</a></h1>
+<p>Since <a href="https://issues.apache.org/jira/browse/SLING-7256">SLING-7256</a> it is possible to inject <a href="https://sling.apache.org/documentation/bundles/context-aware-configuration/context-aware-configuration.html">Context-Aware Configuration</a> directly in Sling Models.</p>
+<p>To use it, the following additional bundles are required (with given minimal version):</p>
+<ul>
+<li>Apache Sling Context-Aware Configuration Implementation 1.6.0 (<code>org.apache.sling.caconfig.impl</code>)</li>
+<li>Apache Sling Context-Aware Configuration SPI 1.4.0 (<code>org.apache.sling.caconfig.spi</code>)</li>
+<li>Apache Sling Context-Aware Configuration API 1.1.2 (<code>org.apache.sling.caconfig.api</code>)</li>
+<li>Apache Sling Models Context-Aware Configuration 1.0.0 (<code>org.apache.sling.models.caconfig</code>) - this bundle contains both the <code>@ContextAwareConfiguration</code> injector annotation and the injector implementation.</li>
+</ul>
+<p>Usage example for injecting a single Context-Aware configuration looked up in context of the current resource (<code>SingleConfig</code> is an annotation class describing the context-aware configuration):</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables = { SlingHttpServletRequest.class, Resource.class })
+public class SingleConfigModel {
+
+    @ContextAwareConfiguration
+    private SingleConfig config;
+
+}
+</code></pre>
+<p>Example for injecting a configuration list (<code>ListConfig</code> is an annotation class configured as context-aware configuration list):</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables = { SlingHttpServletRequest.class, Resource.class })
+public class ListConfigModel {
+
+    @ContextAwareConfiguration
+    private List&lt;ListConfig&gt; configList;
+}
+</code></pre>
+<p>For more examples, see <a href="https://github.com/apache/sling-org-apache-sling-models-caconfig/tree/master/src/test/java/org/apache/sling/models/caconfig/example/model">example models from unit tests</a>.</p>
+<h1><a href="#custom-injectors" id="custom-injectors">Custom Injectors</a></h1>
+<p>To create a custom injector, simply implement the <code>org.apache.sling.models.spi.Injector</code> interface and register your implementation with the OSGi service registry. Please refer to the <a href="https://github.com/apache/sling-org-apache-sling-models-impl/tree/master/src/main/java/org/apache/sling/models/impl/injectors">standard injectors in Git</a> for examples.</p>
+<h1><a href="#custom-annotations" id="custom-annotations">Custom Annotations</a></h1>
+<p>To create a custom annotation, implement the <code>org.apache.sling.models.spi.injectorspecific.StaticInjectAnnotationProcessorFactory</code> interface. This interface may be implemented by the same class as implements an injector, but this is not strictly necessary. Please refer to the <a href="https://github.com/apache/sling-org-apache-sling-models-impl/tree/master/src/main/java/org/apache/sling/models/impl/injectors">injectors in Git</a> for examples.</p>
+<h1><a href="#specifying-an-alternate-adapter-class" id="specifying-an-alternate-adapter-class">Specifying an alternate Adapter Class</a></h1>
+<p>By default, each model class is registered using its own implementation class as adapter. If the class has additional interfaces this is not relevant.</p>
+<p>Since Sling Models API version 1.1.0 the <code>@Model</code> annotation provides an optional <code>adapters</code> attribute which allows specifying under which type(s) the model implementation should be registered in the Models Adapter Factory. Prior to <em>Sling Models Impl 1.3.10</em> only the given class names are used as adapter classes, since 1.3.10 the implementation class is always being registered implicitly as adapter as well (see <a href="https://issues.apache.org/jira/browse/SLING-6658">SLING-6658</a>). With this attribute it is possible to register the model to one (or multiple) interfaces, or a superclass. This allows separating the model interface from the implementation, which makes it easier to provide mock implementations for unit tests as well.</p>
+<p>Example:</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptables = Resource.class, adapters = MyService.class)
+public class MyModel implements MyService {
+    // injects fields and implements the MyService methods
+}
+</code></pre>
+<p>In this example a <code>Resource</code> can be adapted to a <code>MyService</code> interface, and the Sling Models implementation instantiates a <code>MyModel</code> class for this.</p>
+<p>It is possible to have multiple models implementing the same interface. By default Sling Models will just take the first one ordered alphabetically by the class name. Applications can provide an OSGi service implementing the <code>ImplementationPicker</code> SPI interface which could use context to determine which implementation can be chosen, e.g. depending an a tenant or content path context. If multiple implementations of the <code>ImplementationPicker</code> interface are present, they are queried one after another in order of their service ranking property, the first one that picks an implementation wins.</p>
+<h1><a href="#associating-a-model-class-with-a-resource-type" id="associating-a-model-class-with-a-resource-type">Associating a Model Class with a Resource Type</a></h1>
+<p>Since API version 1.3.0 The <code>@Model</code> annotation provides an optional <code>resourceType</code> attribute which allows for model classes to be associated with one or more resource types. This is used in three different ways.</p>
+<p>In the case of multiple model classes implementing the same interface, the class with the &quot;closest&quot; resource type will be used when adapting to the interface.</p>
+<p>The <code>ModelFactory</code> service interface has methods <code>Object getModelFromResource(Resource)</code> and <code>Object getModelFromRequest(SlingHttpServletRequest)</code> which will dynamically determine the adapter class based on the <code>Resource</code> using its type. In the case of the <code>SlingHttpServletRequest</code> method, it uses the request's <code>Resource</code> object (i.e. by calling <code>request.getResource()</code>)</p>
+<p>The resource type is also used as part of the Exporter framework (see next section).</p>
+<h1><a href="#exporter-framework" id="exporter-framework">Exporter Framework</a></h1>
+<p>Since API version 1.3.0 Sling Models objects can be exported to arbitrary Java objects through the Sling Models Exporter framework. Model objects can be programatically exported by calling the <code>ModelFactory</code> method <code>exportModel()</code>. This method takes as its arguments:</p>
+<ul>
+<li>the model object</li>
+<li>an exporter name</li>
+<li>a target class</li>
+<li>a map of options</li>
+</ul>
+<p>The exact semantics of the exporting will be determined by an implementation of the <code>ModelExporter</code> service interface.</p>
+<p>Sling Models currently includes a single exporter, using the Jackson framework, which is capable of serializing models as JSON or transforming them to <code>java.util.Map</code> objects. It is included in a dedicated bundle with the symbolic name <a href="https://github.com/apache/sling-org-apache-sling-models-jacksonexporter"><code>org.apache.sling.models.jacksonexporter</code></a>. It supports the option key <code>tidy</code> (which will auto indent the returned JSON for better readability)</p>
+<p>In addition, model objects can have servlets automatically registered for their resource type (if it is set) using the <code>@Exporter</code> annotation. For example, a model class with the annotation</p>
+<pre><code><!-- TODO syntax marker (::java) disabled -->@Model(adaptable = Resource.class, resourceType = &quot;myco/components/foo&quot;)
+@Exporter(name = &quot;jackson&quot;, extensions = &quot;json&quot;)
+</code></pre>
+<p>results in the registration of a servlet with the resource type and extension specified and a selector of 'model' (overridable through the <code>@Exporter</code> annotation's <code>selector</code> attribute). When this servlet is invoked, the <code>Resource</code> will be adapted to the model, exported as a <code>java.lang.String</code> (via the named Exporter) and then returned to the client. The <code>ExportServlet</code> only supports models for adaptable <code>org.apache.sling.api.resource.Resource</code> or <code>org.apache.sling.api.SlingHttpServletRequest</code>. If a model is adaptable from both the <code>Resource</code> is used.</p>
+<p>The ExportServlet allows to pass options to the exporter either via additional selectors (which just get the String value <code>&quot;true&quot;</code> in the used options map) or via regular request parameters (which are added to the options map with the given value or just with the String value <code>&quot;true&quot;</code> in case the request parameter didn't carry a value).</p>
+<h1><a href="#registration-of-sling-models-classes-via-bnd-plugin" id="registration-of-sling-models-classes-via-bnd-plugin">Registration of Sling Models classes via bnd plugin</a></h1>
+<p>With the Sling Models bnd plugin it is possible to automatically generated the necessary bundle header to register the Sling Models classes contained in the Maven bundle project - either with maven-bundle-plugin or with bnd-maven-plugin. By default the plugin generates a <code>Sling-Model-Classes</code> header (only compatible with Sling Models Impl since version 1.3.4, see <a href="https://issues.apache.org/jira/browse/SLING-6308">SLING-6308</a>).</p>
+<p>Example configuration:</p>
+<pre><code><!-- TODO syntax marker (#!xml) disabled -->&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.felix&lt;/groupId&gt;
+    &lt;artifactId&gt;maven-bundle-plugin&lt;/artifactId&gt;
+    &lt;extensions&gt;true&lt;/extensions&gt;
+    &lt;configuration&gt;
+        &lt;instructions&gt;
+            &lt;_plugin&gt;org.apache.sling.bnd.models.ModelsScannerPlugin&lt;/_plugin&gt;
+        &lt;/instructions&gt;
+    &lt;/configuration&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.sling&lt;/groupId&gt;
+            &lt;artifactId&gt;org.apache.sling.bnd.models&lt;/artifactId&gt;
+            &lt;version&gt;1.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/plugin&gt;
+</code></pre>
+<p>If a <code>Sling-Model-Packages</code> or <code>Sling-Model-Classes</code> was already manually defined for the bundle the bnd plugin does nothing. So if you want to migrate an existing project to use this plugin remove the existing header definitions.</p>
+<p>If you want to generate a bundle header compliant with Sling Models &lt; 1.3.4 (i.e. <code>Sling-Model-Packages</code>) you need to specify the attribute <code>generatePackagesHeader=true</code>. An example configuration looks like this</p>
+<pre><code><!-- TODO syntax marker (#!xml) disabled -->&lt;configuration&gt;
+    &lt;instructions&gt;
+        &lt;_plugin&gt;org.apache.sling.bnd.models.ModelsScannerPlugin;generatePackagesHeader=true&lt;/_plugin&gt;
+    &lt;/instructions&gt;
+&lt;/configuration&gt;
+</code></pre>
+<h1><a href="#discouraged-annotations" id="discouraged-annotations">Discouraged annotations</a></h1>
+<p>In earlier versions of Sling Models the use of the annotation <code>@Inject</code> was suggested and documented; but over time it turned out that it had 2 major issues:</p>
+<ul>
+<li>This injection iterated through all available injectors and injected the first non-null value provided by an injector. This lead to unpredictable behavior, although the order is well-defined. Also @Source would have helped but it was rarely used.</li>
+<li>Also this turned out to be a performance bottleneck, especially if (optional) injections were not succesful, and then all other injectors have to be tried.</li>
+</ul>
+<p>For these reasons the injector-specific annotations have been created, and this documentation strongly recommends to use them. For the sake of completeness these discouraged annotations are still covered here briefly, but they should no longer be used.</p>
+<p><code>@Inject</code> :   marks a field or method as injectable</p>
+<p><code>@Named</code> :   declare a name for the injection (otherwise, defaults based on field or method name).</p>
+<p><code>@Optional</code> :   marks a field or method injection as optional</p>
+<p><code>@Filter</code> :   an OSGi service filter</p>
+<p><code>@Path</code> :   only used together with the resource-path injector to specify the path of a resource</p>
+</section></div></div><div data-pagefind-body="true" data-pagefind-weight="7.0" style="display:none;"> - ( Sling Models )</div>                            
+                        </div>
+                    </div>
+                </div>
+            </div><footer class="footer">
+                <div class="content has-text-centered is-small">
+<div class="editpagelink">
+                        This page can be edited on GitHub at <a href="https://github.com/apache/sling-site/edit/master/src/main/jbake/content/documentation/bundles/models.md">
+                            content/documentation/bundles/models.md
+                        </a>
+                    </div>                    <div class="revisionInfo">
+                        Last modified by <span class="author">Konrad Windszus</span> on <span class="comment">2023-07-08</span>
+                    </div><p>
+                        Apache Sling, Sling, Apache, the Apache feather logo, and the Apache Sling project
+    logo are trademarks of The Apache Software Foundation. All other marks mentioned 
+    may be trademarks or registered trademarks of their respective owners.
+                    </p><p>
+                        Copyright © 2007-2024<a href="https://www.apache.org/">
+                            The Apache Software Foundation
+                        </a>|<a href="https://privacy.apache.org/policies/privacy-policy-public.html">
+                            Privacy Policy
+                        </a>
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
