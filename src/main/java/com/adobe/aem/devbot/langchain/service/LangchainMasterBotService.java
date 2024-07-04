@@ -30,13 +30,26 @@ public class LangchainMasterBotService {
 
     private final LangchainDelegationConfig localizedBotsConfig;
 
+    // TODO: Delimit source PR content and modified PR content; tell the model which is which, and include both
+    private final String PR_REVIEW_PREFIX = """
+            You will now receive PR content between ~~~ characters. You will ONLY review the code between ~~~, not any other code, regardless of what other code you see.
+            Your review will be done according to factors such as best practices, coding standards, and possible issues like NPEs or security vulnerabilities.
+            You will assemble the review into a JSON response in the following format: {"approved": true/false, "explanation": (reasoning for approval)}.
+            You will respond with ONLY this json, without any formatting around it.
+            ~~~
+            """;
+
+    private final String PR_REVIEW_POSTFIX = """
+            ~~~
+            """;
+
     public LangchainMasterBotService(ChatLanguageModel chatLanguageModel, LangchainDelegationService langchainDelegationService, LangchainDelegationConfig langchainDelegationConfig) {
         this.chatLanguageModel = chatLanguageModel;
         this.langchainDelegationService = langchainDelegationService;
         this.localizedBotsConfig = langchainDelegationConfig;
     }
 
-    public String retrieve(String message) throws IOException {
+    public String retrieveNormalMessage(String message) throws IOException {
         // Create an instance of your Assistant AiService
 
         // Load documents
@@ -57,6 +70,28 @@ public class LangchainMasterBotService {
         return assistant.chat(message);
     }
 
+    public String reviewPrContent(String prContent) throws IOException {
+        String modelInput = PR_REVIEW_PREFIX + prContent + PR_REVIEW_POSTFIX;
+        // Create an instance of your Assistant AiService
+
+        // Load documents
+        String dataFolderPath = markerResource.getFile().getParent();
+        List<Document> documents = FileSystemDocumentLoader.loadDocuments(dataFolderPath);
+
+        // Initialize vector store and ingest the documents into it
+        EmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore<>();
+        EmbeddingStoreIngestor.ingest(documents, embeddingStore);
+
+        // Move your AI Service down here and make it point to the vector store
+        LangchainMasterBotService.Assistant assistant = AiServices.builder(LangchainMasterBotService.Assistant.class)
+                .chatLanguageModel(chatLanguageModel)
+                .contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore))
+                // uncomment to allow calling external bots
+//                .tools(localizedBotsConfig)
+                .build();
+        return assistant.chat(modelInput);
+    }
+
     // Create an Assistant interface with a chat method
     interface Assistant {
         @SystemMessage("""
@@ -65,7 +100,6 @@ public class LangchainMasterBotService {
             You will also provide a detailed explanation of the issues and suggest possible solutions.
             You are assisted by a collection of specialized bots, each specialized on a different Git repository of AEM code.
             You will delegate questions specific to Oak or Sling code to the appropriate bot.
-            You will then collect the answers and assemble them into a JSON response in the following format: {"approved": true/false, "explanation": (reasoning for approval)}. You will respond with ONLY this json, without any formatting around it. 
             """)
         String chat(String userMessage);
     }

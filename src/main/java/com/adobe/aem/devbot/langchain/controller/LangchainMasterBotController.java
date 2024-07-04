@@ -18,9 +18,16 @@ public class LangchainMasterBotController {
         this.langchainMasterBotService = langchainMasterBotService;
     }
 
-    @GetMapping("/generate/master")
+    @GetMapping("/generate/master/chat")
     public String generateResponseForMaster(@RequestParam(value = "message", defaultValue = "Tell me about Oak and Sling") String message) throws IOException {
-        return langchainMasterBotService.retrieve(message);
+        String botResponse = langchainMasterBotService.retrieveNormalMessage(message);
+        return botResponse;
+    }
+
+    @GetMapping("/generate/master/pr_content")
+    public String generateResponseForMasterPrContent(@RequestParam(value = "message", defaultValue = "System.out.println(\"Hello world!\")") String message) throws IOException {
+        String botResponse = langchainMasterBotService.reviewPrContent(message);
+        return botResponse;
     }
 
     //TODO: endpoint for passing a PR link and responding based on its content
