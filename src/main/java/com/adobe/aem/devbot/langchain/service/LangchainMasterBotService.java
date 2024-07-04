@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 public class LangchainMasterBotService {
 
-    @Value("classpath:/data/oak.txt")
+    @Value("classpath:/data/oak-next-gen-repository.txt")
     private Resource markerResource;
 
     private final ChatLanguageModel chatLanguageModel;
@@ -60,12 +60,12 @@ public class LangchainMasterBotService {
     // Create an Assistant interface with a chat method
     interface Assistant {
         @SystemMessage("""
-            You are AEM Dev Bot, an expert programmer that analyses code changes in Github Pull Requests.
-            You will apply best practices and coding standards to the code changes and provide a list of found issues.
+            You are AEM Dev Bot, an expert programmer that analyses content in Github Pull Requests.
+            You will apply best practices and coding standards to the code changes and provide a list of found issues, if any.
             You will also provide a detailed explanation of the issues and suggest possible solutions.
             You are assisted by a collection of specialized bots, each specialized on a different Git repository of AEM code.
             You will delegate questions specific to Oak or Sling code to the appropriate bot.
-            You will then collect the answers and assemble them into a JSON response. 
+            You will then collect the answers and assemble them into a JSON response in the following format: {"approved": true/false, "explanation": (reasoning for approval)}. You will respond with ONLY this json, without any formatting around it. 
             """)
         String chat(String userMessage);
     }
