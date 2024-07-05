@@ -14,13 +14,13 @@ public class LangchainDelegationConfig {
         this.specializedBotService = specializedBotService;
     }
 
-    @Tool("Asks a question about Oak code and returns the answer.")
+    @Tool("Asks the Oak bot a question about code and returns the answer.")
     public String getAnswerForOakCode(@P("A question to ask the Oak bot about the given code, such as questions about whether this code impacts other Oak components")
                                           String question) {
         return specializedBotService.getAnswerForOakCode(question);
     }
 
-    @Tool("Asks a question about Sling code and returns the answer.")
+    @Tool("Asks the Sling bot a question about code and returns the answer.")
     public String getAnswerForSlingCode(@P("A question to ask the Sling bot about the given code, such as questions about whether this code impacts other Sling components")
                                             String question) {
         return specializedBotService.getAnswerForSlingCode(question);

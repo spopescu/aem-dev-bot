@@ -92,7 +92,7 @@ public class LangchainMasterBotService {
                 .chatLanguageModel(chatLanguageModel)
                 .contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore))
                 // uncomment to allow calling external bots
-//                .tools(localizedBotsConfig)
+                .tools(localizedBotsConfig)
                 .build();
         return assistant.chat(modelInput);
     }
@@ -104,7 +104,7 @@ public class LangchainMasterBotService {
             You will apply best practices and coding standards to the code changes and provide a list of found issues, if any.
             You will also provide a detailed explanation of the issues and suggest possible solutions.
             You are assisted by a collection of specialized bots, each specialized on a different Git repository of AEM code.
-            You will ALWAYS ask either the Oak bot or the Sling bot whether there are any concerns about the code.
+            If you encounter a question specific to Oak or Sling code, you will delegate it to the appropriate bot.
             """)
         String chat(String userMessage);
     }
