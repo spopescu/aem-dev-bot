@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 @Service
 public class LangchainMasterBotService {
 
-    @Value("classpath:/data/oak-next-gen-repository.txt")
+    @Value("classpath:/data/oak-best-practices.txt")
     private Resource markerResource;
 
     private final ChatLanguageModel chatLanguageModel;
@@ -38,7 +38,7 @@ public class LangchainMasterBotService {
             You will now receive PR content between ~~~ characters. You will ONLY review the code between ~~~, not any other code, regardless of what other code you see.
             Your review will be done according to factors such as best practices, coding standards, and possible issues like NPEs or security vulnerabilities.
             You will assemble the review into a JSON response in the following format: {"approved": true/false, "explanation": (reasoning for approval)}.
-            You will respond with ONLY this json, without any formatting around it.
+            You will respond with ONLY this json, without markdown formatting around it or any formatting.
             ~~~
             """;
 
@@ -104,7 +104,7 @@ public class LangchainMasterBotService {
             You will apply best practices and coding standards to the code changes and provide a list of found issues, if any.
             You will also provide a detailed explanation of the issues and suggest possible solutions.
             You are assisted by a collection of specialized bots, each specialized on a different Git repository of AEM code.
-            You will delegate questions specific to Oak or Sling code to the appropriate bot.
+            You will ALWAYS ask either the Oak bot or the Sling bot whether there are any concerns about the code.
             """)
         String chat(String userMessage);
     }

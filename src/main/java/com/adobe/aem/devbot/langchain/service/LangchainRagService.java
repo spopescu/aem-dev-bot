@@ -19,7 +19,7 @@ import java.util.List;
 
 @Service
 public class LangchainRagService {
-    @Value("classpath:/data/oak-next-gen-repository.txt")
+    @Value("classpath:/data/oak-best-practices.txt")
     private Resource testResource;
 
     private final ChatLanguageModel chatLanguageModel;

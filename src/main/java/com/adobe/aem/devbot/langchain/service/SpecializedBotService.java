@@ -37,5 +37,5 @@ public class SpecializedBotService {
         return restTemplate.postForObject(botUrl, new BotRequest(question), String.class);
     }
 
-    private record BotRequest(String prompt) {}
+    private record BotRequest(String question) {}
 }

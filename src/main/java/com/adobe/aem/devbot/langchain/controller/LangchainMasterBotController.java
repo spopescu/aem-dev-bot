@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/devbot")
 public class LangchainMasterBotController {
 
     private final LangchainMasterBotService langchainMasterBotService;
+
+    private final Logger logger = Logger.getLogger(LangchainMasterBotController.class.getName());
 
     private final PRService prService;
 
@@ -31,6 +34,7 @@ public class LangchainMasterBotController {
     @GetMapping("/generate/master/pr_content")
     public String generateResponseForMasterPrContent(@RequestParam(value = "message", defaultValue = "int a = 2;") String message) throws IOException {
         String botResponse = langchainMasterBotService.reviewPrContent(message);
+        logger.info("Response: " + botResponse);
         return botResponse;
     }
 
@@ -39,6 +43,7 @@ public class LangchainMasterBotController {
     public String generateResponseForMasterPrLink(@RequestParam(value = "prLink") String prLink) throws IOException {
         String prContent =  prService.getPRContent(prLink);
         String botResponse = langchainMasterBotService.reviewPrContent(prContent);
+        logger.info("Response: " + botResponse);
         return botResponse;
     }
 }
