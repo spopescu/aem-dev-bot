@@ -25,7 +25,7 @@ public class LangchainMasterBotController {
     }
 
     @GetMapping("/generate/master/pr_content")
-    public String generateResponseForMasterPrContent(@RequestParam(value = "message", defaultValue = "System.out.println(\"Hello world!\")") String message) throws IOException {
+    public String generateResponseForMasterPrContent(@RequestParam(value = "message", defaultValue = "int a = 2;") String message) throws IOException {
         String botResponse = langchainMasterBotService.reviewPrContent(message);
         return botResponse;
     }

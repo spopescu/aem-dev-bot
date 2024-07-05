@@ -15,8 +15,8 @@ public class SpecializedBotService {
         this.restTemplate = restTemplate;
     }
 
-    public String getAnswerForJcrCode(String question) {
-        return getAnswer(question, specializedBotsConfiguration.getJcrBotUrl());
+    public String getAnswerForOakCode(String question) {
+        return getAnswer(question, specializedBotsConfiguration.getOakBotUrl());
     }
 
     public String getAnswerForSlingCode(String question) {
