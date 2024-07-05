@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class LangchainMasterBotService {
@@ -29,6 +30,8 @@ public class LangchainMasterBotService {
     private final LangchainDelegationService langchainDelegationService;
 
     private final LangchainDelegationConfig localizedBotsConfig;
+
+    Logger logger = Logger.getLogger(LangchainMasterBotService.class.getName());
 
     // TODO: Delimit source PR content and modified PR content; tell the model which is which, and include both
     private final String PR_REVIEW_PREFIX = """
@@ -71,6 +74,8 @@ public class LangchainMasterBotService {
     }
 
     public String reviewPrContent(String prContent) throws IOException {
+
+        logger.info("Received PR content: " + prContent);
         String modelInput = PR_REVIEW_PREFIX + prContent + PR_REVIEW_POSTFIX;
         // Create an instance of your Assistant AiService
 
