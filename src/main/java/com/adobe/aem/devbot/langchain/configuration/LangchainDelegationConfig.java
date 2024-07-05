@@ -14,10 +14,23 @@ public class LangchainDelegationConfig {
         this.specializedBotService = specializedBotService;
     }
 
-    @Tool("Asks the Oak bot a question about code and returns the answer.")
-    public String getAnswerForOakCode(@P("A question to ask the Oak bot about the given code, such as questions about whether this code impacts other Oak components")
-                                          String question) {
-        return specializedBotService.getAnswerForOakCode(question);
+    @Tool("""
+    Asks the Oak bot questions about code and returns the answer.
+    You will ask questions about the code to the Oak bot and get the answer for each question. Questions will be similar to the following:
+        - What is the impact of this code on the Oak repository?
+        - Does this code follow best practices for Oak?
+        - Does this code have any potential issues?
+        - Does this code have any security vulnerabilities?
+        - Does this code have any potential NPEs?
+        - Does this code have any potential performance issues?
+        - Does this code have any potential memory leaks?
+        - Does this code have any potential thread safety issues?
+    """)
+    public String getAnswerForOakCode(@P("""
+        A set of questions about a PR's code, additionally providing the code itself.
+            """)
+                                          String questionsAndPrCode) {
+        return specializedBotService.getAnswerForOakCode(questionsAndPrCode);
     }
 
     @Tool("Asks the Sling bot a question about code and returns the answer.")
